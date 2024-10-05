@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pet/utils/formatters/formatters.dart';
 
+import '../../provider/model/provider_model.dart';
+
 class UserModel {
   final String id;
   String firstName;
@@ -9,6 +11,7 @@ class UserModel {
   final String email;
   String phoneNo;
   String profilePicture;
+  ServiceProviderModel? serviceProvider;
 
   // Constructors
   UserModel({
@@ -19,7 +22,8 @@ class UserModel {
    required this.email,
    required this.phoneNo,
    required this.profilePicture,
-});
+    this.serviceProvider,
+  });
 
   // Helper Function for Full Name.
   String get fullName => '$firstName $lastName';
@@ -53,6 +57,7 @@ class UserModel {
       'Email': email,
       'PhoneNo': phoneNo,
       'ProfilePicture': profilePicture,
+      'ServiceProvider': serviceProvider?.toJson(),
     };
   }
 
@@ -68,6 +73,9 @@ class UserModel {
         email: data?['Email'] ?? '',
         phoneNo: data?['PhoneNumber'] ?? '',
         profilePicture: data?['ProfilePicture'] ?? '',
+        serviceProvider: data?['ServiceProvider'] != null
+            ? ServiceProviderModel.fromJson(data!['ServiceProvider'])
+            : null,
       );
     } else {
       return UserModel.empty();

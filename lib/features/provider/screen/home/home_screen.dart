@@ -1,10 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pet/constants/colors.dart';
-import 'package:pet/constants/images.dart';
 import 'package:pet/features/provider/screen/home/provider_app_bar.dart';
 import 'package:pet/features/provider/screen/reviews/reviews.dart';
 import '../../../personalization/controller/user_controller.dart';
+import '../../controller/provider_controller.dart';
 import '../about/about.dart';
 import '../appointment/appointment.dart';
 import '../earning/earning.dart';
@@ -15,6 +16,7 @@ class ProviderHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(UserController());
+    final controller1 = Get.put(ProviderController());
 
     return Scaffold(
       backgroundColor: logoPurple,
@@ -32,9 +34,9 @@ class ProviderHomeScreen extends StatelessWidget {
                 children: [
                   ProfileSection(),
                   SizedBox(height: 20),
-                  AboutSection(),
+                  AboutSection(providerId: FirebaseAuth.instance.currentUser!.uid, initialBio: controller1.user.value.bio,),
                   SizedBox(height: 20),
-                  ServiceOverview(),
+                  ServiceOverview(providerId: FirebaseAuth.instance.currentUser!.uid,),
                   SizedBox(height: 20),
                   AppointmentSection(),
                   SizedBox(height: 20),

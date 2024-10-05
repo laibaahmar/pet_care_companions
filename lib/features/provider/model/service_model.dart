@@ -1,59 +1,57 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
-class ServiceListingModel {
-  final String serviceId;  // Unique ID for the service
-  String serviceName;  // Name of the service
-  String description;  // Description of the service
-  double price;  // Price for the service
-  String duration;  // Duration of the service (e.g., "30 minutes")
-  bool isAvailable;  // Whether the service is currently available
+class ServiceModel {
+  String serviceId;
+  String name;
+  String description;
+  double price;
+  int durationInMinutes;
+  bool isAvailable;
+  String category; // New category field
 
   // Constructor
-  ServiceListingModel({
+  ServiceModel({
     required this.serviceId,
-    required this.serviceName,
+    required this.name,
     required this.description,
     required this.price,
-    required this.duration,
+    required this.durationInMinutes,
     this.isAvailable = true,
+    required this.category, // Add category as a required parameter
   });
 
-  // Convert Service Listing to Json
+  // Convert model to JSON
   Map<String, dynamic> toJson() {
     return {
       'ServiceId': serviceId,
-      'ServiceName': serviceName,
+      'Name': name,
       'Description': description,
       'Price': price,
-      'Duration': duration,
+      'DurationInMinutes': durationInMinutes,
       'IsAvailable': isAvailable,
+      'Category': category, // Include category in JSON
     };
   }
 
-  // Create Service Listing from Firebase Document
-  factory ServiceListingModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> document) {
-    if (document.data() != null) {
-      final data = document.data();
-      return ServiceListingModel(
-        serviceId: document.id,
-        serviceName: data?['ServiceName'] ?? '',
-        description: data?['Description'] ?? '',
-        price: data?['Price'] ?? 0.0,
-        duration: data?['Duration'] ?? '',
-        isAvailable: data?['IsAvailable'] ?? true,
-      );
-    } else {
-      return ServiceListingModel.empty();
-    }
+  // Create ServiceModel from JSON
+  factory ServiceModel.fromJson(Map<String, dynamic> json) {
+    return ServiceModel(
+      serviceId: json['ServiceId'] ?? '',
+      name: json['Name'] ?? '',
+      description: json['Description'] ?? '',
+      price: (json['Price'] as num?)?.toDouble() ?? 0.0,
+      durationInMinutes: json['DurationInMinutes'] ?? 0,
+      isAvailable: json['IsAvailable'] ?? true,
+      category: json['Category'] ?? '', // Deserialize category
+    );
   }
 
-  // Function to create an empty Service Listing Model
-  static ServiceListingModel empty() => ServiceListingModel(
-    serviceId: '',
-    serviceName: '',
-    description: '',
-    price: 0.0,
-    duration: '',
-    isAvailable: false,
-  );
+  // Function to create an empty ServiceModel
+  static ServiceModel empty() =>
+      ServiceModel(
+        serviceId: '',
+        name: '',
+        description: '',
+        price: 0.0,
+        durationInMinutes: 0,
+        category: '', // Initialize category
+      );
 }

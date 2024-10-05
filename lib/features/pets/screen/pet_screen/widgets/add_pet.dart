@@ -20,6 +20,8 @@ class AddPetScreen extends StatelessWidget {
   String _type = '';
   String _breed = '';
   int _age = 0;
+  double _weight = 0;
+  String sex = '';
   String _description = '';
   String _imageUrl = '';
   List<String> _diseases = [];
@@ -40,6 +42,8 @@ class AddPetScreen extends StatelessWidget {
         type: _type,
         breed: _breed,
         age: _age,
+        weight: _weight,
+        sex: sex,
         description: _description,
         imageUrl: _imageUrl,
         medicalRecord: medicalRecord,
@@ -90,6 +94,20 @@ class AddPetScreen extends StatelessWidget {
                   keyboardType: TextInputType.number,
                   onSaved: (value) => _age = int.tryParse(value!) ?? 0,
                   validator: (value) => Valid.validateEmpty('Age', value),
+                  style: const TextStyle(fontSize: 14),
+                ),
+                SizedBox(height: Sizes.defaultPadding,),
+                TextFormField(
+                  decoration: InputDecoration(labelText: 'Sex'),
+                  onSaved: (value) => sex = value!,
+                  validator: (value) => Valid.validateEmpty('Sex', value),
+                  style: const TextStyle(fontSize: 14),
+                ),
+                SizedBox(height: Sizes.defaultPadding,),
+                TextFormField(
+                  decoration: InputDecoration(labelText: 'Weight'),
+                  onSaved: (value) => _weight = value! as double,
+                  validator: (value) => Valid.validateEmpty('Weight', value),
                   style: const TextStyle(fontSize: 14),
                 ),
                 SizedBox(height: Sizes.defaultPadding,),

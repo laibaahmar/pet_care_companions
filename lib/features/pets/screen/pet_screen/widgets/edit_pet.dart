@@ -170,6 +170,8 @@ import '../../../controller/pet_controller.dart';
     late String _type = pet.type;
     late String _breed = pet.breed;
     late int _age = pet.age;
+    late double _weight = pet.weight;
+    late String sex = pet.sex;
     late String _description = pet.description;
     late List<String> _diseases = pet.medicalRecord.diseases;
     late List<String> _vaccinations = pet.medicalRecord.vaccinations;
@@ -203,6 +205,8 @@ import '../../../controller/pet_controller.dart';
             type: _type,
             breed: _breed,
             age: _age,
+            sex: sex,
+            weight: _weight,
             description: _description,
             imageUrl: _imageUrl ?? pet.imageUrl, // Use the new image URL if available
             medicalRecord: updatedMedicalRecord,
@@ -299,6 +303,23 @@ import '../../../controller/pet_controller.dart';
                     keyboardType: TextInputType.number,
                     onSaved: (value) => _age = int.tryParse(value!) ?? 0,
                     validator: (value) => Valid.validateEmpty('Age', value),
+                    style: const TextStyle(fontSize: 14),
+                  ),
+                  SizedBox(height: Sizes.defaultPadding),
+                  TextFormField(
+                    initialValue: _weight.toString(),
+                    decoration: const InputDecoration(labelText: 'Weight in kg'),
+                    keyboardType: TextInputType.number,
+                    onSaved: (value) => _weight = value! as double,
+                    validator: (value) => Valid.validateEmpty('Weight', value),
+                    style: const TextStyle(fontSize: 14),
+                  ),
+                  SizedBox(height: Sizes.defaultPadding),
+                  TextFormField(
+                    initialValue: sex,
+                    decoration: InputDecoration(labelText: 'Sex'),
+                    onSaved: (value) => sex = value!,
+                    validator: (value) => Valid.validateEmpty('Sex', value),
                     style: const TextStyle(fontSize: 14),
                   ),
                   SizedBox(height: Sizes.defaultPadding),

@@ -1,87 +1,87 @@
+// import 'package:pet/features/provider/model/service_model.dart';
+//
+// class ServiceProviderModel {
+//   String id;
+//   String bio;
+//   String location;
+//   double rating;
+//   int completedJobs;
+//   bool isAvailable;
+//   List<ServiceModel> services; // List of services provided
+//
+//   ServiceProviderModel({
+//     required this.id,
+//     required this.bio,
+//     required this.location,
+//     this.rating = 0.0,
+//     this.completedJobs = 0,
+//     this.isAvailable = true,
+//     required this.services,
+//   });
+//
+//   // Convert model to JSON
+//   Map<String, dynamic> toJson() {
+//     return {
+//       'Expertise': id,
+//       'Bio': bio,
+//       'Location': location,
+//       'Rating': rating,
+//       "Completed Jobs": completedJobs,
+//       'Availability': isAvailable,
+//       'Services': services.map((service) => service.toJson()).toList(),
+//     };
+//   }
+//
+//   // Create ServiceProviderModel from Firebase Document
+//   factory ServiceProviderModel.fromJson(Map<String, dynamic> json) {
+//     return ServiceProviderModel(
+//       id: json['ID'] ?? '',
+//       bio: json['Bio'] ?? '',
+//       location: json['Location'] ?? '',
+//       rating: (json['Rating'] as num?)?.toDouble() ?? 0.0,
+//       completedJobs: json['Completed Jobs'] ?? '',
+//       isAvailable: json['Availability'] ?? '',
+//       services: (json['Services'] as List)
+//           .map((service) => ServiceModel.fromJson(service))
+//           .toList(),
+//     );
+//   }
+//
+//   static ServiceProviderModel empty() => ServiceProviderModel(
+//     id: '',
+//     bio: '',
+//     location: '',
+//     services: [],
+//   );
+// }
+
+// provider_model.dart
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:pet/features/provider/model/service_model.dart';
-import '../../authentication/models/user_model.dart';
 
-class ProviderModel extends UserModel {
-  List<ServiceListingModel> services;  // List of services the provider offers
-  String providerBio;  // A short bio for the provider
-  double rating;  // Provider's rating from customer reviews
-  int completedJobs;  // Number of jobs the provider has completed
-  bool isAvailable;  // Availability status
+class ServiceProviderModel {
+  String id;
+  String bio;
+  DateTime createdAt;
 
-  // Constructor
-  ProviderModel({
-    required String id,
-    required String firstName,
-    required String lastName,
-    required String username,
-    required String email,
-    required String phoneNo,
-    required String profilePicture,
-    required this.services,
-    required this.providerBio,
-    this.rating = 0.0,
-    this.completedJobs = 0,
-    this.isAvailable = true,
-  }) : super(
-    id: id,
-    firstName: firstName,
-    lastName: lastName,
-    username: username,
-    email: email,
-    phoneNo: phoneNo,
-    profilePicture: profilePicture,
-  );
+  ServiceProviderModel({required this.id, required this.bio, required this.createdAt});
 
-  // Convert Provider Model to Json
-  @override
+  static ServiceProviderModel empty() => ServiceProviderModel(id: '', bio: '', createdAt: DateTime.now());
+
+  // Convert a ProviderModel into a Map. The Map is used to send data to Firestore
   Map<String, dynamic> toJson() {
-    final userJson = super.toJson();
-    userJson.addAll({
-      'Services': services.map((service) => service.toJson()).toList(),
-      'ProviderBio': providerBio,
-      'Rating': rating,
-      'CompletedJobs': completedJobs,
-      'IsAvailable': isAvailable,
-    });
-    return userJson;
+    return {
+      'bio': bio,
+      'createdAt': createdAt,
+    };
   }
 
-  // Create Provider Model from Firebase Document
-  factory ProviderModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> document) {
-    if (document.data() != null) {
-      final data = document.data();
-      return ProviderModel(
-        id: document.id,
-        firstName: data?['FirstName'] ?? '',
-        lastName: data?['LastName'] ?? '',
-        username: data?['Username'] ?? '',
-        email: data?['Email'] ?? '',
-        phoneNo: data?['PhoneNumber'] ?? '',
-        profilePicture: data?['ProfilePicture'] ?? '',
-        services: (data?['Services'] as List)
-            .map((service) => ServiceListingModel.fromSnapshot(service))
-            .toList(),
-        providerBio: data?['ProviderBio'] ?? '',
-        rating: data?['Rating'] ?? 0.0,
-        completedJobs: data?['CompletedJobs'] ?? 0,
-        isAvailable: data?['IsAvailable'] ?? true,
-      );
-    } else {
-      return ProviderModel.empty();
-    }
+  // Convert a Map into a ProviderModel
+  factory ServiceProviderModel.fromJson(Map<String, dynamic> json) {
+    return ServiceProviderModel(
+      id: json['ID'] ?? '',
+      bio: json['Bio'] ?? '',
+      createdAt: (json['createdAt'] as Timestamp).toDate(),
+    );
   }
-
-  // Function to create an empty provider model
-  static ProviderModel empty() => ProviderModel(
-    id: '',
-    firstName: '',
-    lastName: '',
-    username: '',
-    email: '',
-    phoneNo: '',
-    profilePicture: '',
-    services: [],
-    providerBio: '',
-  );
 }
+

@@ -1,33 +1,67 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:pet/constants/colors.dart';
 import 'package:pet/constants/sizes.dart';
+import 'package:pet/features/provider/model/service_model.dart';
+import 'package:pet/features/provider/screen/services/widgets/add_service.dart';
+import 'package:pet/features/provider/screen/services/widgets/edit_service-page.dart';
+
+import '../../controller/provider_controller.dart';
 
 class ServiceOverview extends StatelessWidget {
+  final String providerId; // Pass providerId to fetch specific provider services
+
+  ServiceOverview({required this.providerId});
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(right: Sizes.defaultPadding, left: Sizes.defaultPadding),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text("My Services", style: Theme.of(context).textTheme.headlineSmall,),
-          // Services Section
-          SizedBox(height: Sizes.s*2),
-          _buildServicesList(),
-          SizedBox(height: 20),
-          _buildAddServiceButton(),
-          SizedBox(height: 20),
-        ],
-      ),
+    // Initialize controller
+    final ProviderController controller = Get.put(ProviderController());
+
+    // Fetch services for the provider
+    controller.fetchServices(providerId);
+
+    return Column(
+      children: [
+        Padding(
+          padding: EdgeInsets.only(right: Sizes.defaultPadding, left: Sizes.defaultPadding),
+          child: Obx(() {
+            // Observe the services list to check if it's empty or not
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("My Services", style: Theme.of(context).textTheme.headlineSmall),
+
+                // Conditionally display services or only the "Add New Service" button
+                controller.services.isEmpty
+                    ? Column(
+                      children: [
+                        SizedBox(height: 20),
+                        _buildAddServiceButton(),
+                      ],
+                    ) // No services, just show the add button
+                    : Column(
+                  children: [
+                    _buildServicesList(controller.services), // Show list of services
+                    SizedBox(height: 20),
+                    _buildAddServiceButton(), // Show add button at the bottom
+                  ],
+                ),
+              ],
+            );
+          }),
+        ),
+      ],
     );
   }
 
   // Builds the services list
-  Widget _buildServicesList() {
+  Widget _buildServicesList(List<ServiceModel> services) {
     return ListView.builder(
       shrinkWrap: true,
-      itemCount: 2, // Number of services
+      itemCount: services.length, // Number of services
       itemBuilder: (context, index) {
+        final service = services[index];
         return Card(
           color: logoPurple.withOpacity(0.1),
           margin: EdgeInsets.only(bottom: 12),
@@ -44,12 +78,12 @@ class ServiceOverview extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Service ${index + 1}',
+                      service.name,
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),
                     SizedBox(height: 5),
                     Text(
-                      '\$20 | 30 minutes',
+                      'Rs.${service.price} | ${service.durationInMinutes} minutes',
                       style: TextStyle(color: Colors.grey, fontSize: 14),
                     ),
                   ],
@@ -57,9 +91,10 @@ class ServiceOverview extends StatelessWidget {
                 Row(
                   children: [
                     Switch(
-                      value: true,
+                      value: service.isAvailable,
                       onChanged: (value) {
                         // Toggle availability action
+                        // Call controller to update service availability
                       },
                       activeColor: logoPurple,
                     ),
@@ -67,6 +102,7 @@ class ServiceOverview extends StatelessWidget {
                       icon: Icon(Icons.edit, color: logoPurple),
                       onPressed: () {
                         // Edit service action
+                        Get.to(() => EditServicePage(service: service));
                       },
                     ),
                   ],
@@ -85,6 +121,7 @@ class ServiceOverview extends StatelessWidget {
       child: ElevatedButton.icon(
         onPressed: () {
           // Add new service action
+          Get.to(() => AddServicePage());
         },
         icon: Icon(Icons.add),
         label: Text('Add New Service'),
