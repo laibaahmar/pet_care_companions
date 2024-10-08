@@ -249,11 +249,6 @@ class _DesheddingAndCuttingState extends State<DesheddingAndCutting> {
                       const PetClinicCard(clinicName:'Meow pet Clinic', location: 'RawalPindi', imagePath: 'assets/vaccineclinic.jpg', targetScreen: bookscreen1()),
                       const SizedBox(height: 10),
                       const PetClinicCard(clinicName:'Capital Veterinary Clinic ', location: 'RawalPindi', imagePath: 'assets/vaccineclinic.jpg', targetScreen: bookscreen1()),
-
-
-
-
-
                     ],
                   ),
                 ),

@@ -47,7 +47,18 @@ class Pet {
     required this.medicalRecord,
   });
 
-  static Pet empty() => Pet(id: '', name: '', type: '', breed: '', age: 0, description: '', imageUrl: '', medicalRecord: MedicalRecord(diseases: [], vaccinations: []), sex: '', weight: 0.0,);
+  static Pet empty() => Pet(
+    id: '',
+    name: '',
+    type: '',
+    breed: '',
+    age: 0,
+    description: '',
+    imageUrl: '',
+    medicalRecord: MedicalRecord(diseases: [], vaccinations: []),
+    sex: '',
+    weight: 0.0,
+  );
 
   Map<String, dynamic> toMap() {
     return {
@@ -71,8 +82,8 @@ class Pet {
       type: data['type'] ?? '',
       breed: data['breed'] ?? '',
       age: data['age'] ?? 0,
-      weight: data['age'] ?? 0.0,
-      sex: data['age'] ?? '',
+      weight: data['weight'] ?? 0.0,
+      sex: data['sex'] ?? '',
       description: data['description'] ?? '',
       imageUrl: data['imageUrl'] ?? '',
       medicalRecord: MedicalRecord.fromMap(data['medicalRecord'] ?? {}),

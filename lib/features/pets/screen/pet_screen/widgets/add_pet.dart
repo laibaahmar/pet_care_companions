@@ -21,7 +21,6 @@ class AddPetScreen extends StatelessWidget {
   double _weight = 0;
   String sex = '';
   String _description = '';
-  final String _imageUrl = '';
   List<String> _diseases = [];
   List<String> _vaccinations = [];
 
@@ -43,7 +42,7 @@ class AddPetScreen extends StatelessWidget {
         weight: _weight,
         sex: sex,
         description: _description,
-        imageUrl: _imageUrl,
+        imageUrl: '',
         medicalRecord: medicalRecord,
       );
 
@@ -70,59 +69,52 @@ class AddPetScreen extends StatelessWidget {
                   decoration: const InputDecoration(labelText: 'Pet Name'),
                   onSaved: (value) => _name = value!,
                   validator: (value) => Valid.validateEmpty('Name', value),
-                  style: const TextStyle(fontSize: 14),
                 ),
-                SizedBox(height: Sizes.defaultPadding,),
+                SizedBox(height: Sizes.defaultPadding),
                 TextFormField(
                   decoration: const InputDecoration(labelText: 'Type (e.g., Dog, Cat)'),
                   onSaved: (value) => _type = value!,
                   validator: (value) => Valid.validateEmpty('Type', value),
-                  style: const TextStyle(fontSize: 14),
                 ),
-                SizedBox(height: Sizes.defaultPadding,),
+                SizedBox(height: Sizes.defaultPadding),
                 TextFormField(
                   decoration: const InputDecoration(labelText: 'Breed'),
                   onSaved: (value) => _breed = value!,
                   validator: (value) => Valid.validateEmpty('Breed', value),
-                  style: const TextStyle(fontSize: 14),
                 ),
-                SizedBox(height: Sizes.defaultPadding,),
+                SizedBox(height: Sizes.defaultPadding),
                 TextFormField(
                   decoration: const InputDecoration(labelText: 'Age in months'),
                   keyboardType: TextInputType.number,
                   onSaved: (value) => _age = int.tryParse(value!) ?? 0,
                   validator: (value) => Valid.validateEmpty('Age', value),
-                  style: const TextStyle(fontSize: 14),
                 ),
-                SizedBox(height: Sizes.defaultPadding,),
+                SizedBox(height: Sizes.defaultPadding),
                 TextFormField(
                   decoration: const InputDecoration(labelText: 'Sex'),
                   onSaved: (value) => sex = value!,
                   validator: (value) => Valid.validateEmpty('Sex', value),
-                  style: const TextStyle(fontSize: 14),
                 ),
-                SizedBox(height: Sizes.defaultPadding,),
+                SizedBox(height: Sizes.defaultPadding),
                 TextFormField(
                   decoration: const InputDecoration(labelText: 'Weight'),
-                  onSaved: (value) => _weight = value! as double,
+                  keyboardType: TextInputType.number,
+                  onSaved: (value) => _weight = double.tryParse(value!) ?? 0,
                   validator: (value) => Valid.validateEmpty('Weight', value),
-                  style: const TextStyle(fontSize: 14),
                 ),
-                SizedBox(height: Sizes.defaultPadding,),
+                SizedBox(height: Sizes.defaultPadding),
                 TextFormField(
                   decoration: const InputDecoration(labelText: 'Description'),
                   onSaved: (value) => _description = value!,
                   validator: (value) => Valid.validateEmpty('Description', value),
                   maxLines: 3,
-                  style: const TextStyle(fontSize: 14),
                 ),
-                SizedBox(height: Sizes.defaultPadding,),
-                // Adding Diseases and Vaccinations
+                SizedBox(height: Sizes.defaultPadding),
                 TextFormField(
                   decoration: const InputDecoration(labelText: 'Diseases (comma separated)'),
                   onSaved: (value) => _diseases = value!.split(',').map((e) => e.trim()).toList(),
                 ),
-                SizedBox(height: Sizes.defaultPadding,),
+                SizedBox(height: Sizes.defaultPadding),
                 TextFormField(
                   decoration: const InputDecoration(labelText: 'Vaccinations (comma separated)'),
                   onSaved: (value) => _vaccinations = value!.split(',').map((e) => e.trim()).toList(),

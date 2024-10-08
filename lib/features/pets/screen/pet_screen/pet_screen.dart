@@ -27,6 +27,10 @@ class MyPetsScreen extends StatelessWidget {
         backgroundColor: Colors.white,
       ),
       body: Obx(() {
+        if (petController.isLoadingImage.value) {
+          return Center(child: CircularProgressIndicator());
+        }
+
         if (petController.pets.isEmpty) {
           return Padding(
             padding: EdgeInsets.all(Sizes.defaultPadding),
@@ -39,9 +43,8 @@ class MyPetsScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: Sizes.defaultPadding),
-                // AddPetButton wrapped in a SizedBox for size control
                 SizedBox(
-                  width: 150,  // Control the width of the button
+                  width: 150,
                   child: AddPetButton(userController: userController),
                 ),
               ],
@@ -58,7 +61,6 @@ class MyPetsScreen extends StatelessWidget {
                       onTap: () {
                         Get.to(() => PetProfile(pet: petController.pets[index]));
                       },
-
                       child: ListTile(
                         leading: petController.pets[index].imageUrl.isNotEmpty
                             ? CircleAvatar(
@@ -75,11 +77,10 @@ class MyPetsScreen extends StatelessWidget {
                 ),
               ),
               if (petController.pets.length < 5)
-              // AddPetButton wrapped in a SizedBox for size control
                 Padding(
                   padding: EdgeInsets.all(Sizes.defaultPadding),
                   child: SizedBox(
-                    width: 150,  // Control the width of the button
+                    width: 150,
                     child: AddPetButton(userController: userController),
                   ),
                 ),
@@ -90,4 +91,3 @@ class MyPetsScreen extends StatelessWidget {
     );
   }
 }
-
