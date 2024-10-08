@@ -15,12 +15,12 @@ class EarningsOverview extends StatelessWidget {
             "Earnings",
             style: Theme.of(context).textTheme.headlineSmall,
           ),
-          SizedBox(height: 20),
-          EarningsCard(
+          const SizedBox(height: 20),
+          const EarningsCard(
             period: "This Week",
             amount: "\$350",
           ),
-          EarningsCard(
+          const EarningsCard(
             period: "This Month",
             amount: "\$1500",
           ),
@@ -34,12 +34,12 @@ class EarningsCard extends StatelessWidget {
   final String period;
   final String amount;
 
-  EarningsCard({required this.period, required this.amount});
+  const EarningsCard({super.key, required this.period, required this.amount});
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.only(bottom: 10),
+      margin: const EdgeInsets.only(bottom: 10),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       color: logoPurple.withOpacity(0.1),
       elevation: 0,

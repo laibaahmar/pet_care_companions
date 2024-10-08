@@ -25,16 +25,16 @@ const MyAppBar ({super.key});
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
+                const Row(
                   children: [
-                    Text('Hello!', style: Theme.of(context).textTheme.bodyMedium),
+                    Text('Hello!', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w400, color: text2)),
                   ],
                 ),
                 Obx(() {
                   if(controller.profileLoading.value) {
                     return const ShimmerEffect(width: 80, height: 15);
                   }
-                  return Text(controller.user.value.fullName, style: Theme.of(context).textTheme.headlineSmall);
+                  return Text(controller.user.value.fullName, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: text2));
                 }),
 
               ],
@@ -43,7 +43,7 @@ const MyAppBar ({super.key});
               children: [
                 Stack(
                   children: [
-                    IconButton(onPressed: () {}, icon: const Icon(Iconsax.message), color: textColor,),
+                    IconButton(onPressed: () {}, icon: const Icon(Iconsax.message), color: text2,),
                     Positioned(
                       right: 0,
                       child: Container(
@@ -53,8 +53,8 @@ const MyAppBar ({super.key});
                           color: logoPink,
                           borderRadius: BorderRadius.circular(100),
                         ),
-                        child: Center(
-                          child: Text('2', style: Theme.of(context).textTheme.bodySmall),
+                        child: const Center(
+                          child: Text('2', style: TextStyle(fontSize: 12, color: text2)),
                         ),
                       ),
                     ),
@@ -62,7 +62,7 @@ const MyAppBar ({super.key});
                 ),
                 Stack(
                   children: [
-                    IconButton(onPressed: () {}, icon: const Icon(Iconsax.notification), color: textColor,),
+                    IconButton(onPressed: () {}, icon: const Icon(Iconsax.notification), color: text2,),
                     Positioned(
                       right: 5,
                       child: Container(
@@ -72,8 +72,8 @@ const MyAppBar ({super.key});
                           color: logoPink,
                           borderRadius: BorderRadius.circular(100),
                         ),
-                        child: Center(
-                          child: Text('2', style: Theme.of(context).textTheme.bodySmall),
+                        child: const Center(
+                          child: Text('2', style: TextStyle(fontSize: 12, color: text2)),
                         ),
                       ),
                     ),

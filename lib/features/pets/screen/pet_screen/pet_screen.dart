@@ -11,7 +11,7 @@ class MyPetsScreen extends StatelessWidget {
   final String userId;
   final PetController petController = Get.put(PetController());
 
-  MyPetsScreen({required this.userId}) {
+  MyPetsScreen({super.key, required this.userId}) {
     petController.fetchPets(userId); // Fetch pets when the screen is created
   }
 
@@ -64,7 +64,7 @@ class MyPetsScreen extends StatelessWidget {
                             ? CircleAvatar(
                           backgroundImage: NetworkImage(petController.pets[index].imageUrl),
                         )
-                            : CircleAvatar(child: Icon(Icons.pets)),
+                            : const CircleAvatar(child: Icon(Icons.pets)),
                         title: Text(petController.pets[index].name),
                         subtitle: Text(
                           '${petController.pets[index].type}, ${petController.pets[index].breed}, Age: ${petController.pets[index].age}',

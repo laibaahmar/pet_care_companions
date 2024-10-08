@@ -4,7 +4,6 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:pet/data/repositories/user_repository.dart';
-import 'package:pet/features/authentication/screens/login/login.dart';
 import 'package:pet/features/authentication/screens/onboarding/onboarding_screen.dart';
 import 'package:pet/features/authentication/screens/signup/verify_email.dart';
 import 'package:pet/features/authentication/screens/welcome/welcome.dart';

@@ -177,7 +177,7 @@ import '../../../controller/pet_controller.dart';
     late List<String> _vaccinations = pet.medicalRecord.vaccinations;
     String? _imageUrl;
 
-    EditPetScreen({required this.pet});
+    EditPetScreen({super.key, required this.pet});
 
     Future<void> _pickImage() async {
       final picker = ImagePicker();
@@ -259,13 +259,13 @@ import '../../../controller/pet_controller.dart';
                               ? FileImage(File(_imageUrl!))
                               : pet.imageUrl.isNotEmpty
                               ? NetworkImage(pet.imageUrl)
-                              : AssetImage('assets/default_pet_image.png') as ImageProvider,
+                              : const AssetImage('assets/default_pet_image.png') as ImageProvider,
                         ),
                         Positioned(
                           bottom: 0,
                           right: 0,
                           child: IconButton(
-                            icon: Icon(Icons.camera_alt, color: Colors.blueAccent),
+                            icon: const Icon(Icons.camera_alt, color: Colors.blueAccent),
                             onPressed: _pickImage,
                           ),
                         ),
@@ -275,7 +275,7 @@ import '../../../controller/pet_controller.dart';
                   SizedBox(height: Sizes.defaultPadding),
                   TextFormField(
                     initialValue: _name,
-                    decoration: InputDecoration(labelText: 'Pet Name'),
+                    decoration: const InputDecoration(labelText: 'Pet Name'),
                     onSaved: (value) => _name = value!,
                     validator: (value) => Valid.validateEmpty('Name', value),
                     style: const TextStyle(fontSize: 14),
@@ -283,7 +283,7 @@ import '../../../controller/pet_controller.dart';
                   SizedBox(height: Sizes.defaultPadding),
                   TextFormField(
                     initialValue: _type,
-                    decoration: InputDecoration(labelText: 'Type (e.g., Dog, Cat)'),
+                    decoration: const InputDecoration(labelText: 'Type (e.g., Dog, Cat)'),
                     onSaved: (value) => _type = value!,
                     validator: (value) => Valid.validateEmpty('Type', value),
                     style: const TextStyle(fontSize: 14),
@@ -291,7 +291,7 @@ import '../../../controller/pet_controller.dart';
                   SizedBox(height: Sizes.defaultPadding),
                   TextFormField(
                     initialValue: _breed,
-                    decoration: InputDecoration(labelText: 'Breed'),
+                    decoration: const InputDecoration(labelText: 'Breed'),
                     onSaved: (value) => _breed = value!,
                     validator: (value) => Valid.validateEmpty('Breed', value),
                     style: const TextStyle(fontSize: 14),
@@ -317,7 +317,7 @@ import '../../../controller/pet_controller.dart';
                   SizedBox(height: Sizes.defaultPadding),
                   TextFormField(
                     initialValue: sex,
-                    decoration: InputDecoration(labelText: 'Sex'),
+                    decoration: const InputDecoration(labelText: 'Sex'),
                     onSaved: (value) => sex = value!,
                     validator: (value) => Valid.validateEmpty('Sex', value),
                     style: const TextStyle(fontSize: 14),
@@ -325,7 +325,7 @@ import '../../../controller/pet_controller.dart';
                   SizedBox(height: Sizes.defaultPadding),
                   TextFormField(
                     initialValue: _description,
-                    decoration: InputDecoration(labelText: 'Description'),
+                    decoration: const InputDecoration(labelText: 'Description'),
                     onSaved: (value) => _description = value!,
                     validator: (value) => Valid.validateEmpty('Description', value),
                     maxLines: 3,
@@ -334,23 +334,23 @@ import '../../../controller/pet_controller.dart';
                   SizedBox(height: Sizes.defaultPadding),
                   TextFormField(
                     initialValue: _diseases.join(', '),
-                    decoration: InputDecoration(labelText: 'Diseases (comma separated)'),
+                    decoration: const InputDecoration(labelText: 'Diseases (comma separated)'),
                     onSaved: (value) => _diseases = value!.split(',').map((e) => e.trim()).toList(),
                     style: const TextStyle(fontSize: 14),
                   ),
                   SizedBox(height: Sizes.defaultPadding),
                   TextFormField(
                     initialValue: _vaccinations.join(', '),
-                    decoration: InputDecoration(labelText: 'Vaccinations (comma separated)'),
+                    decoration: const InputDecoration(labelText: 'Vaccinations (comma separated)'),
                     onSaved: (value) => _vaccinations = value!.split(',').map((e) => e.trim()).toList(),
                     style: const TextStyle(fontSize: 14),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () => _updatePet(context),
-                      child: Text('Update Pet'),
+                      child: const Text('Update Pet'),
                     ),
                   ),
                 ],

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get_storage/get_storage.dart';
 import '../../../../../constants/images.dart';
 import '../../../../../constants/sizes.dart';
 import '../../../../../constants/text.dart';

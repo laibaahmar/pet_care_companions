@@ -15,19 +15,29 @@ class NavigationMenu extends StatelessWidget {
 
     return Scaffold(
       bottomNavigationBar: Obx(
-        () => NavigationBar(
-          backgroundColor: Colors.white,
-          indicatorColor: logoPurple,
-          height: 80,
-          elevation: 0,
-          selectedIndex: controller.selectedIndex.value,
-          onDestinationSelected: (index) => controller.selectedIndex.value = index,
-          destinations: const [
-            NavigationDestination(icon: Icon(Iconsax.home), label: 'Home'),
-            NavigationDestination(icon: Icon(Iconsax.shop), label: 'Shop'),
-            NavigationDestination(icon: Icon(Iconsax.book), label: 'Blog'),
-            NavigationDestination(icon: Icon(Iconsax.user), label: 'Profile'),
-          ],
+        () => Container(
+          decoration: BoxDecoration(
+            border: Border(
+              top: BorderSide(
+                color: Colors.grey.withOpacity(0.5), // Border color with some transparency
+                width: 1.0, // Border width
+              ),
+            ),
+          ),
+          child: NavigationBar(
+            backgroundColor: Colors.white,
+            indicatorColor: logoPurple,
+            height: 80,
+            elevation: 0,
+            selectedIndex: controller.selectedIndex.value,
+            onDestinationSelected: (index) => controller.selectedIndex.value = index,
+            destinations: const [
+              NavigationDestination(icon: Icon(Iconsax.home), label: 'Home'),
+              NavigationDestination(icon: Icon(Iconsax.shop), label: 'Shop'),
+              NavigationDestination(icon: Icon(Iconsax.book), label: 'Blog'),
+              NavigationDestination(icon: Icon(Iconsax.user), label: 'Profile'),
+            ],
+          ),
         ),
       ),
       body: Obx(() => controller.screens[controller.selectedIndex.value]),

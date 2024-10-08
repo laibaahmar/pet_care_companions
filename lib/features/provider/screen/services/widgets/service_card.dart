@@ -4,7 +4,7 @@ class ServiceCard extends StatelessWidget {
   final String title;
   final IconData icon;
 
-  ServiceCard({required this.title, required this.icon});
+  const ServiceCard({super.key, required this.title, required this.icon});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class ServiceCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(15),
-        boxShadow: [
+        boxShadow: const [
           BoxShadow(
             color: Colors.black12,
             blurRadius: 10,
@@ -25,11 +25,11 @@ class ServiceCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(icon, size: 40, color: Colors.blue),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Text(
             title,
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
           ),
         ],
       ),

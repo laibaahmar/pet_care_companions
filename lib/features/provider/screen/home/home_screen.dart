@@ -13,6 +13,8 @@ import '../profle/provider_profile.dart';
 import '../services/services.dart';
 
 class ProviderHomeScreen extends StatelessWidget {
+  const ProviderHomeScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(UserController());
@@ -25,24 +27,24 @@ class ProviderHomeScreen extends StatelessWidget {
           children: [
             const ProviderAppBar(), // Moved app bar here
             Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
                 color: Colors.white,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ProfileSection(),
-                  SizedBox(height: 20),
+                  const ProfileSection(),
+                  const SizedBox(height: 20),
                   AboutSection(providerId: FirebaseAuth.instance.currentUser!.uid, initialBio: controller1.user.value.bio,),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   ServiceOverview(providerId: FirebaseAuth.instance.currentUser!.uid,),
-                  SizedBox(height: 20),
-                  AppointmentSection(),
-                  SizedBox(height: 20),
-                  EarningsOverview(),
-                  SizedBox(height: 20),
-                  ReviewsSection(),
+                  const SizedBox(height: 20),
+                  const AppointmentSection(),
+                  const SizedBox(height: 20),
+                  const EarningsOverview(),
+                  const SizedBox(height: 20),
+                  const ReviewsSection(),
                   // _buildReviewsSection(),
                 ],
               ),

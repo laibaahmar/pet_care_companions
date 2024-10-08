@@ -9,7 +9,7 @@ class EditServicePage extends StatelessWidget {
   final ServiceModel service;
   final ProviderController controller = Get.find<ProviderController>(); // Use existing instance
 
-  EditServicePage({required this.service}) {
+  EditServicePage({super.key, required this.service}) {
     controller.initializeWithService(service); // Initialize fields with existing data
   }
 
@@ -17,7 +17,7 @@ class EditServicePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Service'),
+        title: const Text('Edit Service'),
         backgroundColor: Colors.white,
       ),
       body: Padding(
@@ -28,7 +28,7 @@ class EditServicePage extends StatelessWidget {
             children: [
               TextFormField(
                 controller: controller.nameController,
-                decoration: InputDecoration(labelText: 'Service Name'),
+                decoration: const InputDecoration(labelText: 'Service Name'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter the service name';
@@ -40,7 +40,7 @@ class EditServicePage extends StatelessWidget {
 
               TextFormField(
                 controller: controller.descriptionController,
-                decoration: InputDecoration(labelText: 'Service Description'),
+                decoration: const InputDecoration(labelText: 'Service Description'),
                 maxLines: 3,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -54,7 +54,7 @@ class EditServicePage extends StatelessWidget {
               TextFormField(
                 controller: controller.priceController,
                 keyboardType: TextInputType.number,
-                decoration: InputDecoration(labelText: 'Price (Rs.)'),
+                decoration: const InputDecoration(labelText: 'Price (Rs.)'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter the service price';
@@ -67,7 +67,7 @@ class EditServicePage extends StatelessWidget {
               TextFormField(
                 controller: controller.durationController,
                 keyboardType: TextInputType.number,
-                decoration: InputDecoration(labelText: 'Duration (minutes)'),
+                decoration: const InputDecoration(labelText: 'Duration (minutes)'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter the service duration';
@@ -78,13 +78,13 @@ class EditServicePage extends StatelessWidget {
               SizedBox(height: Sizes.s),
 
               Obx(() => SwitchListTile(
-                title: Text('Service Available'),
+                title: const Text('Service Available'),
                 value: controller.isAvailable.value,
                 onChanged: (value) {
                   controller.isAvailable.value = value;
                 },
               )),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
 
               ElevatedButton(
                 onPressed: () {
@@ -92,7 +92,7 @@ class EditServicePage extends StatelessWidget {
                     controller.updateService(service.serviceId, providerId: FirebaseAuth.instance.currentUser!.uid);
                   }
                 },
-                child: Text('Update Service'),
+                child: const Text('Update Service'),
               ),
               SizedBox(height: Sizes.s*1.5,),
               ElevatedButton(
@@ -104,7 +104,7 @@ class EditServicePage extends StatelessWidget {
                     controller.deleteService(service.serviceId, FirebaseAuth.instance.currentUser!.uid);
                   }
                 },
-                child: Text('Delete Service'),
+                child: const Text('Delete Service'),
               ),
             ],
           ),

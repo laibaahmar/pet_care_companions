@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:pet/constants/images.dart';
-import '../../../../common/widgets/shimmer/shimmer_effect.dart';
 import '../../../../constants/colors.dart';
 import '../../../../constants/sizes.dart';
 import '../../../personalization/controller/user_controller.dart';

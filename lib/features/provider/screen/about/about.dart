@@ -265,7 +265,7 @@ class AboutSection extends StatelessWidget {
   final String providerId; // Provider ID for saving to the database
   final String initialBio; // The initial bio from the database
 
-  AboutSection({required this.providerId, required this.initialBio});
+  const AboutSection({super.key, required this.providerId, required this.initialBio});
 
   @override
   Widget build(BuildContext context) {
@@ -294,9 +294,9 @@ class AboutSection extends StatelessWidget {
                   ? IconButton(
                 color: textColor,
                 onPressed: controller.toggleEdit,
-                icon: Icon(Icons.edit),
+                icon: const Icon(Icons.edit),
               )
-                  : SizedBox.shrink()),
+                  : const SizedBox.shrink()),
             ],
           ),
           SizedBox(height: Sizes.s),
@@ -320,21 +320,21 @@ class AboutSection extends StatelessWidget {
       width: double.infinity,
       child: Card(
         color: logoPurple.withOpacity(0.1),
-        margin: EdgeInsets.only(bottom: 12),
+        margin: const EdgeInsets.only(bottom: 12),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
         ),
         elevation: 0,
         child: Padding(
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 bio,
-                style: TextStyle(fontSize: 16),
+                style: const TextStyle(fontSize: 16),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
             ],
           ),
         ),
@@ -343,38 +343,38 @@ class AboutSection extends StatelessWidget {
   }
 
   Widget _buildBioEditor(ProviderController controller, String providerId) {
-    final TextEditingController _bioController =
+    final TextEditingController bioController =
     TextEditingController(text: controller.providerBio.value);
 
     return Column(
       children: [
         TextField(
-          controller: _bioController,
+          controller: bioController,
           maxLines: 4,
-          style: TextStyle(fontSize: 14),
-          decoration: InputDecoration(
+          style: const TextStyle(fontSize: 14),
+          decoration: const InputDecoration(
             labelText: "Enter your bio",
             border: OutlineInputBorder(),
           ),
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             ElevatedButton(
               onPressed: () {
                 controller.toggleEdit(); // Close the editor
-                _bioController.clear(); // Clear the text field if needed
+                bioController.clear(); // Clear the text field if needed
               },
-              child: Text("Cancel"),
+              child: const Text("Cancel"),
             ),
-            SizedBox(width: 10),
+            const SizedBox(width: 10),
             ElevatedButton(
               onPressed: () {
-                controller.saveBio(_bioController.text, providerId);
+                controller.saveBio(bioController.text, providerId);
                 controller.toggleEdit(); // Close the editor after saving
               },
-              child: Text("Save"),
+              child: const Text("Save"),
             ),
           ],
         ),

@@ -17,12 +17,12 @@ class AppointmentSection extends StatelessWidget {
             style: Theme.of(context).textTheme.headlineSmall,
           ),
           SizedBox(height: Sizes.s*2),
-          AppointmentCard(
+          const AppointmentCard(
             clientName: "Jane Smith",
             dateTime: "25th Sept, 10:00 AM",
             service: "Dog Walking",
           ),
-          AppointmentCard(
+          const AppointmentCard(
             clientName: "Michael Brown",
             dateTime: "25th Sept, 12:00 PM",
             service: "Grooming",
@@ -38,12 +38,12 @@ class AppointmentCard extends StatelessWidget {
   final String dateTime;
   final String service;
 
-  AppointmentCard({required this.clientName, required this.dateTime, required this.service});
+  const AppointmentCard({super.key, required this.clientName, required this.dateTime, required this.service});
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.only(bottom: 10),
+      margin: const EdgeInsets.only(bottom: 10),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       elevation: 0,
       color: logoPurple.withOpacity(0.1),
@@ -56,13 +56,13 @@ class AppointmentCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(clientName, style: Theme.of(context).textTheme.bodyLarge),
-                SizedBox(height: 5),
-                Text(service, style: TextStyle(color: Colors.grey, fontSize: 14)),
-                SizedBox(height: 5),
-                Text(dateTime, style: TextStyle(color: textColor, fontSize: 14),),
+                const SizedBox(height: 5),
+                Text(service, style: const TextStyle(color: Colors.grey, fontSize: 14)),
+                const SizedBox(height: 5),
+                Text(dateTime, style: const TextStyle(color: textColor, fontSize: 14),),
               ],
             ),
-            Icon(Icons.arrow_forward_ios, color: textColor,),
+            const Icon(Icons.arrow_forward_ios, color: textColor,),
           ],
         ),
       ),

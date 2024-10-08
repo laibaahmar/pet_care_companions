@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
@@ -11,7 +10,6 @@ import 'package:pet/features/personalization/screens/settings/widgets/user_profi
 import 'package:pet/utils/helpers/helpers.dart';
 import '../../../../constants/colors.dart';
 import '../../../personalization/controller/user_controller.dart';
-import '../../../pets/screen/pet_screen/pet_screen.dart';
 
 class ProviderSettingScreen extends StatelessWidget {
   const ProviderSettingScreen({super.key});

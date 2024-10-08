@@ -65,6 +65,9 @@ flutter:
     - assets/logo/
     - assets/animations/
     - assets/fonts/
+    - assets/
+    - assets/images/
+    - assets/images/home/
 
   fonts:
     - family: Ubuntu
@@ -77,4 +80,3 @@ flutter:
         - asset: assets/fonts/Ubuntu/Ubuntu-Medium.ttf
         - asset: assets/fonts/Ubuntu/Ubuntu-MediumItalic.ttf
         - asset: assets/fonts/Ubuntu/Ubuntu-Regular.ttf
-

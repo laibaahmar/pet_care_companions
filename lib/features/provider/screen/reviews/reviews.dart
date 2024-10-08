@@ -16,13 +16,13 @@ class ReviewsSection extends StatelessWidget {
             "Ratings & Reviews",
             style: Theme.of(context).textTheme.headlineSmall,
           ),
-          SizedBox(height: 20),
-          ReviewCard(
+          const SizedBox(height: 20),
+          const ReviewCard(
             clientName: "Emily Watson",
             rating: 5,
             comment: "Great service! My dog loved the walk.",
           ),
-          ReviewCard(
+          const ReviewCard(
             clientName: "Tom Hardy",
             rating: 4,
             comment: "Good grooming, but arrived a little late.",
@@ -38,13 +38,13 @@ class ReviewCard extends StatelessWidget {
   final int rating;
   final String comment;
 
-  ReviewCard(
-      {required this.clientName, required this.rating, required this.comment});
+  const ReviewCard(
+      {super.key, required this.clientName, required this.rating, required this.comment});
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.only(bottom: 10),
+      margin: const EdgeInsets.only(bottom: 10),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       elevation: 0,
       color: logoPurple.withOpacity(0.1),
@@ -67,8 +67,8 @@ class ReviewCard extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 10),
-            Text(comment, style: TextStyle(color: Colors.grey, fontSize: 14)),
+            const SizedBox(height: 10),
+            Text(comment, style: const TextStyle(color: Colors.grey, fontSize: 14)),
           ],
         ),
       ),

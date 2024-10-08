@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../model/pet_model.dart';
@@ -43,7 +42,7 @@ class PetController extends GetxController {
           .collection('pets')
           .snapshots()
           .listen((snapshot) {
-        pets.value = snapshot.docs.map((doc) => Pet.fromMap(doc.data() as Map<String, dynamic>)).toList();
+        pets.value = snapshot.docs.map((doc) => Pet.fromMap(doc.data())).toList();
       });
     }
 

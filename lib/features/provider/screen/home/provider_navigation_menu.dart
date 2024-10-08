@@ -39,6 +39,6 @@ class ProviderNavigationMenu extends StatelessWidget {
 class NavigationController extends GetxController{
   final Rx<int> selectedIndex = 0.obs;
 
-  final screens = [ProviderHomeScreen(), Container(color: Colors.greenAccent), Container(color: Colors.purple,), const ProviderSettingScreen()];
+  final screens = [const ProviderHomeScreen(), Container(color: Colors.greenAccent), Container(color: Colors.purple,), const ProviderSettingScreen()];
 }
 

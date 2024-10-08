@@ -167,7 +167,7 @@ import '../../../controller/provider_controller.dart';
 class AddServicePage extends StatelessWidget {
   final ProviderController controller = Get.find<ProviderController>(); // Use existing instance
 
-  AddServicePage() {
+  AddServicePage({super.key}) {
     controller.clearForm(); // Clear fields when navigating to this page
   }
 
@@ -176,7 +176,7 @@ class AddServicePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Text('Add New Service'),
+        title: const Text('Add New Service'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -186,7 +186,7 @@ class AddServicePage extends StatelessWidget {
             children: [
               TextFormField(
                 controller: controller.nameController,
-                decoration: InputDecoration(labelText: 'Service Name'),
+                decoration: const InputDecoration(labelText: 'Service Name'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter the service name';
@@ -198,7 +198,7 @@ class AddServicePage extends StatelessWidget {
 
               TextFormField(
                 controller: controller.descriptionController,
-                decoration: InputDecoration(labelText: 'Service Description'),
+                decoration: const InputDecoration(labelText: 'Service Description'),
                 maxLines: 3,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -212,7 +212,7 @@ class AddServicePage extends StatelessWidget {
               TextFormField(
                 controller: controller.priceController,
                 keyboardType: TextInputType.number,
-                decoration: InputDecoration(labelText: 'Price (Rs.)'),
+                decoration: const InputDecoration(labelText: 'Price (Rs.)'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter the service price';
@@ -225,7 +225,7 @@ class AddServicePage extends StatelessWidget {
               TextFormField(
                 controller: controller.durationController,
                 keyboardType: TextInputType.number,
-                decoration: InputDecoration(labelText: 'Duration (minutes)'),
+                decoration: const InputDecoration(labelText: 'Duration (minutes)'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter the service duration';
@@ -237,7 +237,7 @@ class AddServicePage extends StatelessWidget {
 
               Obx(() => DropdownButtonFormField<String>(
                 value: controller.selectedCategory.value.isNotEmpty ? controller.selectedCategory.value : null,
-                decoration: InputDecoration(labelText: 'Category'),
+                decoration: const InputDecoration(labelText: 'Category'),
                 items: controller.categorySubCategories.keys.map((category) {
                   return DropdownMenuItem<String>(
                     value: category,
@@ -261,7 +261,7 @@ class AddServicePage extends StatelessWidget {
                 if (controller.selectedCategory.value.isNotEmpty) {
                   return DropdownButtonFormField<String>(
                     value: controller.selectedSubCategory.value.isNotEmpty ? controller.selectedSubCategory.value : null,
-                    decoration: InputDecoration(labelText: 'Subcategory'),
+                    decoration: const InputDecoration(labelText: 'Subcategory'),
                     items: controller.categorySubCategories[controller.selectedCategory.value]!.map((subcategory) {
                       return DropdownMenuItem<String>(
                         value: subcategory,
@@ -279,19 +279,19 @@ class AddServicePage extends StatelessWidget {
                     },
                   );
                 } else {
-                  return SizedBox.shrink();
+                  return const SizedBox.shrink();
                 }
               }),
               SizedBox(height: Sizes.s),
 
               Obx(() => SwitchListTile(
-                title: Text('Service Available'),
+                title: const Text('Service Available'),
                 value: controller.isAvailable.value,
                 onChanged: (value) {
                   controller.isAvailable.value = value;
                 },
               )),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
 
               ElevatedButton(
                 onPressed: () {
@@ -299,7 +299,7 @@ class AddServicePage extends StatelessWidget {
                     controller.addService(providerId: FirebaseAuth.instance.currentUser?.uid);
                   }
                 },
-                child: Text('Add Service'),
+                child: const Text('Add Service'),
               ),
             ],
           ),

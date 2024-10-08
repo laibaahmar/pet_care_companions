@@ -25,3 +25,8 @@ const String accountCreatedImage = "assets/images/signup/2.jpg";
 // Animations
 
 const String loader = "assets/animations/loader.gif";
+
+// Home Screen
+const String doctor = "assets/images/home/doctor.png";
+const String ambulance = "assets/images/home/ambulance.png";
+const String community = "assets/images/home/community.png";

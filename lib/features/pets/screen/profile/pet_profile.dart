@@ -11,7 +11,7 @@ class PetProfile extends StatelessWidget {
   final Pet pet;
   User? user;
 
-  PetProfile({Key? key, required this.pet}) : super(key: key);
+  PetProfile({super.key, required this.pet});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class PetProfile extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           pet.name,
-          style: TextStyle(color: textColor, fontWeight: FontWeight.w500),
+          style: const TextStyle(color: textColor, fontWeight: FontWeight.w500),
         ),
         backgroundColor: Colors.white,
       ),
@@ -49,7 +49,7 @@ class PetProfile extends StatelessWidget {
                       color: Colors.grey.withOpacity(0.2),
                       spreadRadius: 2,
                       blurRadius: 5,
-                      offset: Offset(0, 3), // changes position of shadow
+                      offset: const Offset(0, 3), // changes position of shadow
                     ),
                   ],
                 ),
@@ -69,12 +69,12 @@ class PetProfile extends StatelessWidget {
               Center(
                 child: ElevatedButton(
                   onPressed: () => Get.to(() => EditPetScreen(pet: pet)),
-                  child: Text('Edit Profile'),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: logoPurple, // Change this to your desired button color
-                    padding: EdgeInsets.symmetric(vertical: 15, horizontal: 30),
-                    textStyle: TextStyle(fontSize: 18),
+                    padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
+                    textStyle: const TextStyle(fontSize: 18),
                   ),
+                  child: const Text('Edit Profile'),
                 ),
               ),
             ],
@@ -92,12 +92,12 @@ class PetProfile extends StatelessWidget {
         children: [
           Text(
             '$title:',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
           ),
           Expanded(
             child: Text(
               value,
-              style: TextStyle(fontSize: 16),
+              style: const TextStyle(fontSize: 16),
               textAlign: TextAlign.end,
               overflow: TextOverflow.ellipsis,
             ),

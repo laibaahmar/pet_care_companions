@@ -1,11 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pet/common/widgets/loaders/loaders.dart';
 import 'package:pet/constants/images.dart';
 import 'package:pet/features/provider/model/provider_model.dart';
-import 'package:pet/features/provider/screen/home/home_screen.dart';
 import 'package:pet/utils/popups/full_screen_loader.dart';
 import '../model/service_model.dart';
 
@@ -140,7 +138,7 @@ class ProviderController extends GetxController {
       price: double.parse(priceController.text),
       durationInMinutes: int.parse(durationController.text),
       isAvailable: isAvailable.value,
-      category: selectedSubCategory!.value!,
+      category: selectedSubCategory.value,
     );
 
     try {
@@ -170,8 +168,8 @@ class ProviderController extends GetxController {
     descriptionController.clear();
     priceController.clear();
     durationController.clear();
-    selectedCategory?.value = '';
-    selectedSubCategory?.value = '';
+    selectedCategory.value = '';
+    selectedSubCategory.value = '';
     isAvailable.value = true;
   }
 

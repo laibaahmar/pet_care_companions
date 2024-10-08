@@ -1,7 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 
 import '../../../../../constants/colors.dart';
 import '../../../../../constants/sizes.dart';
@@ -13,7 +11,7 @@ class AddPetScreen extends StatelessWidget {
   final String userId;
   final PetController petController = Get.put(PetController());
 
-  AddPetScreen({required this.userId});
+  AddPetScreen({super.key, required this.userId});
 
   final _formKey = GlobalKey<FormState>();
   String _name = '';
@@ -23,7 +21,7 @@ class AddPetScreen extends StatelessWidget {
   double _weight = 0;
   String sex = '';
   String _description = '';
-  String _imageUrl = '';
+  final String _imageUrl = '';
   List<String> _diseases = [];
   List<String> _vaccinations = [];
 
@@ -69,21 +67,21 @@ class AddPetScreen extends StatelessWidget {
             child: Column(
               children: [
                 TextFormField(
-                  decoration: InputDecoration(labelText: 'Pet Name'),
+                  decoration: const InputDecoration(labelText: 'Pet Name'),
                   onSaved: (value) => _name = value!,
                   validator: (value) => Valid.validateEmpty('Name', value),
                   style: const TextStyle(fontSize: 14),
                 ),
                 SizedBox(height: Sizes.defaultPadding,),
                 TextFormField(
-                  decoration: InputDecoration(labelText: 'Type (e.g., Dog, Cat)'),
+                  decoration: const InputDecoration(labelText: 'Type (e.g., Dog, Cat)'),
                   onSaved: (value) => _type = value!,
                   validator: (value) => Valid.validateEmpty('Type', value),
                   style: const TextStyle(fontSize: 14),
                 ),
                 SizedBox(height: Sizes.defaultPadding,),
                 TextFormField(
-                  decoration: InputDecoration(labelText: 'Breed'),
+                  decoration: const InputDecoration(labelText: 'Breed'),
                   onSaved: (value) => _breed = value!,
                   validator: (value) => Valid.validateEmpty('Breed', value),
                   style: const TextStyle(fontSize: 14),
@@ -98,21 +96,21 @@ class AddPetScreen extends StatelessWidget {
                 ),
                 SizedBox(height: Sizes.defaultPadding,),
                 TextFormField(
-                  decoration: InputDecoration(labelText: 'Sex'),
+                  decoration: const InputDecoration(labelText: 'Sex'),
                   onSaved: (value) => sex = value!,
                   validator: (value) => Valid.validateEmpty('Sex', value),
                   style: const TextStyle(fontSize: 14),
                 ),
                 SizedBox(height: Sizes.defaultPadding,),
                 TextFormField(
-                  decoration: InputDecoration(labelText: 'Weight'),
+                  decoration: const InputDecoration(labelText: 'Weight'),
                   onSaved: (value) => _weight = value! as double,
                   validator: (value) => Valid.validateEmpty('Weight', value),
                   style: const TextStyle(fontSize: 14),
                 ),
                 SizedBox(height: Sizes.defaultPadding,),
                 TextFormField(
-                  decoration: InputDecoration(labelText: 'Description'),
+                  decoration: const InputDecoration(labelText: 'Description'),
                   onSaved: (value) => _description = value!,
                   validator: (value) => Valid.validateEmpty('Description', value),
                   maxLines: 3,
@@ -121,20 +119,20 @@ class AddPetScreen extends StatelessWidget {
                 SizedBox(height: Sizes.defaultPadding,),
                 // Adding Diseases and Vaccinations
                 TextFormField(
-                  decoration: InputDecoration(labelText: 'Diseases (comma separated)'),
+                  decoration: const InputDecoration(labelText: 'Diseases (comma separated)'),
                   onSaved: (value) => _diseases = value!.split(',').map((e) => e.trim()).toList(),
                 ),
                 SizedBox(height: Sizes.defaultPadding,),
                 TextFormField(
-                  decoration: InputDecoration(labelText: 'Vaccinations (comma separated)'),
+                  decoration: const InputDecoration(labelText: 'Vaccinations (comma separated)'),
                   onSaved: (value) => _vaccinations = value!.split(',').map((e) => e.trim()).toList(),
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: _addPet,
-                    child: Text('Add Pet'),
+                    child: const Text('Add Pet'),
                   ),
                 ),
               ],

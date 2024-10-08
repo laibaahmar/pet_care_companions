@@ -11,7 +11,7 @@ import '../../controller/provider_controller.dart';
 class ServiceOverview extends StatelessWidget {
   final String providerId; // Pass providerId to fetch specific provider services
 
-  ServiceOverview({required this.providerId});
+  const ServiceOverview({super.key, required this.providerId});
 
   @override
   Widget build(BuildContext context) {
@@ -36,14 +36,14 @@ class ServiceOverview extends StatelessWidget {
                 controller.services.isEmpty
                     ? Column(
                       children: [
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         _buildAddServiceButton(),
                       ],
                     ) // No services, just show the add button
                     : Column(
                   children: [
                     _buildServicesList(controller.services), // Show list of services
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     _buildAddServiceButton(), // Show add button at the bottom
                   ],
                 ),
@@ -64,7 +64,7 @@ class ServiceOverview extends StatelessWidget {
         final service = services[index];
         return Card(
           color: logoPurple.withOpacity(0.1),
-          margin: EdgeInsets.only(bottom: 12),
+          margin: const EdgeInsets.only(bottom: 12),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15),
           ),
@@ -81,10 +81,10 @@ class ServiceOverview extends StatelessWidget {
                       service.name,
                       style: Theme.of(context).textTheme.bodyLarge,
                     ),
-                    SizedBox(height: 5),
+                    const SizedBox(height: 5),
                     Text(
                       'Rs.${service.price} | ${service.durationInMinutes} minutes',
-                      style: TextStyle(color: Colors.grey, fontSize: 14),
+                      style: const TextStyle(color: Colors.grey, fontSize: 14),
                     ),
                   ],
                 ),
@@ -99,7 +99,7 @@ class ServiceOverview extends StatelessWidget {
                       activeColor: logoPurple,
                     ),
                     IconButton(
-                      icon: Icon(Icons.edit, color: logoPurple),
+                      icon: const Icon(Icons.edit, color: logoPurple),
                       onPressed: () {
                         // Edit service action
                         Get.to(() => EditServicePage(service: service));
@@ -123,14 +123,14 @@ class ServiceOverview extends StatelessWidget {
           // Add new service action
           Get.to(() => AddServicePage());
         },
-        icon: Icon(Icons.add),
-        label: Text('Add New Service'),
+        icon: const Icon(Icons.add),
+        label: const Text('Add New Service'),
         style: ElevatedButton.styleFrom(
-          padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
           ),
-          textStyle: TextStyle(fontSize: 16),
+          textStyle: const TextStyle(fontSize: 16),
         ),
       ),
     );
