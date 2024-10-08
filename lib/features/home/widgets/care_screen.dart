@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pet/constants/images.dart';
 import 'package:pet/constants/sizes.dart';
 import '../../../constants/colors.dart';
 import '../care screen/dentalscreen.dart';
@@ -39,19 +40,19 @@ class CareScreen extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  _buildServiceCard(context, 'Vaccination', 'Keep your pet safe with regular vaccines.', 'assets/vaccination.png', const VaccinationScreen()),
+                  _buildServiceCard(context, 'Vaccination', 'Keep your pet safe with regular vaccines.', vaccination, const VaccinationScreen()),
                   SizedBox(height: Sizes.s*1.5,),
-                  _buildServiceCard(context, 'Dental Care', 'Ensure your pet has a healthy mouth and teeth.', 'assets/Dentalcare.png', const dentalcare()),
+                  _buildServiceCard(context, 'Dental Care', 'Ensure your pet has a healthy mouth and teeth.', dental, const DentalCare()),
                   SizedBox(height: Sizes.s*1.5,),
-                  _buildServiceCard(context, 'Routine Checkup', 'Regular checkups for your pet’s health.', 'assets/routinecheckup.png', const routinecheckup()),
+                  _buildServiceCard(context, 'Routine Checkup', 'Regular checkups for your pet’s health.', routineCheckup, const RoutineCheckup()),
                   SizedBox(height: Sizes.s*1.5,),
-                  _buildServiceCard(context, 'Illness & Injuries', 'Immediate care for any illness or injury.', 'assets/ilnessinjuries.png', const illnessandinjuries()),
+                  _buildServiceCard(context, 'Illness & Injuries', 'Immediate care for any illness or injury.', illness, const IllnessAndInjuries()),
                   SizedBox(height: Sizes.s*1.5,),
-                  _buildServiceCard(context, 'Pet Sitting', 'Professional pet sitting when you’re away.','assets/petsitting.png', const petsittingscreen()),
+                  _buildServiceCard(context, 'Pet Sitting', 'Professional pet sitting when you’re away.',petSitting, const PetSitting()),
                   SizedBox(height: Sizes.s*1.5,),
-                  _buildServiceCard(context, 'Pet Walking', 'Daily walks to keep your pet healthy.', 'assets/petwalking.png', const petwalkingscreen()),
+                  _buildServiceCard(context, 'Pet Walking', 'Daily walks to keep your pet healthy.', petWalking, const PetWalking()),
                   SizedBox(height: Sizes.s*1.5,),
-                  _buildServiceCard(context, 'Litter Training', 'Help your pet learn proper litter habits.', 'assets/littertraining.png', const littertraining()),
+                  _buildServiceCard(context, 'Litter Training', 'Help your pet learn proper litter habits.', litterTraining, const LitterTraining()),
                 ],
               ),
             ),
@@ -95,7 +96,7 @@ class CareScreen extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Row(
             children: [
-              Image(image: AssetImage(imagePath), width: 100),
+              Image(image: AssetImage(imagePath), width: 70, height: 70,),
               const SizedBox(width: 10), // Added spacing between the image and text
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

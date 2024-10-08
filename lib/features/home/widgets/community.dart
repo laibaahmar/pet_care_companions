@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pet/constants/images.dart';
+import 'package:pet/constants/sizes.dart';
 
 import '../../../constants/colors.dart';
 import '../communityscreens/communityscreen.dart';
@@ -19,24 +20,25 @@ class Community extends StatelessWidget {
       ),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Row(
           children: [
-            RichText(
-              text: TextSpan(
-                text: 'Join Our Amazing \n',
-                style: Theme.of(context).textTheme.bodyLarge,
-                children: <TextSpan>[
-                  TextSpan(
-                    text: 'Community',
-                    style: Theme.of(context).textTheme.bodyLarge,
-                  ),
-                ],
-              ),
-            ),
-            Row(
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                RichText(
+                  text: TextSpan(
+                    text: 'Join Our Amazing \n',
+                    style: Theme.of(context).textTheme.bodyLarge,
+                    children: <TextSpan>[
+                      TextSpan(
+                        text: 'Community',
+                        style: Theme.of(context).textTheme.bodyLarge,
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(height: Sizes.defaultPadding,),
                 OutlinedButton(
                   onPressed: () {
                     Navigator.push(context, PageRouteBuilder(
@@ -61,16 +63,18 @@ class Community extends StatelessWidget {
                     child: Text('Join Now',),
                   ),
                 ),
-                const Spacer(),
-                const Expanded(
-                  child: Image(
-                    image: AssetImage(community),
-                  ),
-                ),
+
               ],
             ),
+            const Expanded(
+              child: Image(
+                image: AssetImage(community),
+                width: 100,
+                height: 100,
+              ),
+            ),
           ],
-        ),
+        )
       ),
     );
   }

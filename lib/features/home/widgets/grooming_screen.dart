@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import '../../../../constants/constants.dart';
+import 'package:pet/constants/images.dart';
 import '../../../constants/colors.dart';
-import '../grooming screen/bathingandbrushing.dart';
-import '../grooming screen/deshedding and haircutting.dart';
-import '../grooming screen/styling and touches.dart';
+import '../grooming screen/bathing_and_brushing.dart';
+import '../grooming screen/deshedding_and_haircutting.dart';
+import '../grooming screen/styling_and_touches.dart';
 
 class GroomingScreen extends StatefulWidget {
   const GroomingScreen({super.key});
@@ -39,11 +39,11 @@ class _GroomingScreenState extends State<GroomingScreen> {
               ),
               child: Column(
                 children: [
-                  _buildServiceCard(context, 'Bathing & Brushing', 'Refresh your pet with a soothing bath and brush.', 'assets/vaccination.png', const bathingandbrushingscreen()),
+                  _buildServiceCard(context, 'Bathing & Brushing', 'Refresh your pet with a soothing bath and brush.', vaccination, const BathingAndBrushing()),
                   const SizedBox(height: 10),
-                  _buildServiceCard(context, 'Haircutting', 'Tame shedding and style your pets coat.', 'assets/Dentalcare.png', const desheddingandbrushingscreen()),
+                  _buildServiceCard(context, 'Haircutting', 'Tame shedding and style your pets coat.', dental, const DesheddingAndCutting()),
                   const SizedBox(height: 10),
-                  _buildServiceCard(context, 'Styling & Touches', 'Add flair with stylish cuts and final touches.', 'assets/routinecheckup.png', const stylingandtouchescsreen()),
+                  _buildServiceCard(context, 'Styling & Touches', 'Add flair with stylish cuts and final touches.', routineCheckup, const StylingAndTouches()),
                 ],
               ),
             ),
@@ -89,7 +89,7 @@ Widget _buildServiceCard(BuildContext context, String title, String description,
         padding: const EdgeInsets.all(8.0),
         child: Row(
           children: [
-            Image(image: AssetImage(imagePath), width: 100),
+            Image(image: AssetImage(imagePath), width: 70, height: 70,),
             const SizedBox(width: 10), // Added spacing between the image and text
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,

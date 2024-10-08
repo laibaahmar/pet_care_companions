@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:pet/constants/images.dart';
+import '../../../constants/colors.dart';
 import '../../../constants/constants.dart';
+import '../../../constants/sizes.dart';
 import '../care screen/booking_screen/Booking_screen.dart';
-class bathingandbrushingscreen extends StatefulWidget {
-  const bathingandbrushingscreen({super.key});
+
+class BathingAndBrushing extends StatefulWidget {
+  const BathingAndBrushing({super.key});
 
   @override
-  State<bathingandbrushingscreen> createState() => _bathingandbrushingscreenState();
+  State<BathingAndBrushing> createState() => _BathingAndBrushingState();
 }
 
-class _bathingandbrushingscreenState extends State<bathingandbrushingscreen> {
+class _BathingAndBrushingState extends State<BathingAndBrushing> {
   String? selectedPet;
   int currentPageIndex = 0;
   int catClickCount = 0; // Counter for Cat clicks
@@ -20,16 +24,15 @@ class _bathingandbrushingscreenState extends State<bathingandbrushingscreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffE9BC52),
       appBar: AppBar(
-        title: const Text('Bathing & Brushing'),
+        title: const Text('Bathing & Brushing', style: TextStyle(color: textColor, fontWeight: FontWeight.w500)),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
-        backgroundColor: const Color(0xffE9BC52),
+        backgroundColor: Colors.white
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -50,7 +53,6 @@ class _bathingandbrushingscreenState extends State<bathingandbrushingscreen> {
                         height: 200,
                         width: double.infinity, // Use double.infinity to fit the container width
                         decoration: BoxDecoration(
-                          border: Border.all(color: Colors.deepPurple),
                           boxShadow: [
                             BoxShadow(
                               color: Colors.black.withOpacity(0.3),
@@ -63,13 +65,13 @@ class _bathingandbrushingscreenState extends State<bathingandbrushingscreen> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: const Image(
-                          image: AssetImage('assets/littertraining.png'),
+                          image: AssetImage(litterTraining),
                           fit: BoxFit.cover, // Ensure the image fits the container
                         ),
                       ),
-                      const SizedBox(height: 10),
-                      const Text('Select Pet Type',style: heading2,),
-                      const SizedBox(height: 10),
+                      SizedBox(height: Sizes.m),
+                      Text('Select Pet Type', style: Theme.of(context).textTheme.headlineSmall),
+                      SizedBox(height: Sizes.s),
                       RichText(
                         text: const TextSpan(
                           text: 'Note: ', style: TextStyle(color: Colors.red,fontSize: 18),
@@ -82,8 +84,9 @@ class _bathingandbrushingscreenState extends State<bathingandbrushingscreen> {
                       ),
 
 
-                      const SizedBox(height: 20),
+                      SizedBox(height: Sizes.m),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           GestureDetector(
                             onTap: () {
@@ -100,6 +103,8 @@ class _bathingandbrushingscreenState extends State<bathingandbrushingscreen> {
                               });
                             }, // End of onTap (Cat)
                             child: Container(
+                              width: 70,
+                              height: 70,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 boxShadow: [
@@ -116,7 +121,7 @@ class _bathingandbrushingscreenState extends State<bathingandbrushingscreen> {
                                 children: [
                                   const CircleAvatar(
                                     maxRadius: 45.0,
-                                    backgroundImage: AssetImage('assets/cat.png'),
+                                    backgroundImage: AssetImage(cat),
                                   ), // End of CircleAvatar (Cat)
                                   if (isCatLoading)
                                     const CircularProgressIndicator(
@@ -142,6 +147,8 @@ class _bathingandbrushingscreenState extends State<bathingandbrushingscreen> {
                               });
                             }, // End of onTap (Dog)
                             child: Container(
+                              width: 70,
+                              height: 70,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 boxShadow: [
@@ -158,7 +165,7 @@ class _bathingandbrushingscreenState extends State<bathingandbrushingscreen> {
                                 children: [
                                   const CircleAvatar(
                                     maxRadius: 45.0,
-                                    backgroundImage: AssetImage('assets/dog.png'),
+                                    backgroundImage: AssetImage(dog),
                                   ), // End of CircleAvatar (Dog)
                                   if (isDogLoading)
                                     const CircularProgressIndicator(
@@ -184,6 +191,8 @@ class _bathingandbrushingscreenState extends State<bathingandbrushingscreen> {
                               });
                             }, // End of onTap (Rabbit)
                             child: Container(
+                              width: 70,
+                              height: 70,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 boxShadow: [
@@ -200,7 +209,7 @@ class _bathingandbrushingscreenState extends State<bathingandbrushingscreen> {
                                 children: [
                                   const CircleAvatar(
                                     maxRadius: 45.0,
-                                    backgroundImage: AssetImage('assets/rabbit.png'),
+                                    backgroundImage: AssetImage(rabbit),
                                   ), // End of CircleAvatar (Rabbit)
                                   if (isRabbitLoading)
                                     const CircularProgressIndicator(
@@ -224,9 +233,9 @@ class _bathingandbrushingscreenState extends State<bathingandbrushingscreen> {
                             const SizedBox(height: 20),
                           ],
                         ),
-                      const SizedBox(height: 20),
-                      Text('Nearby Vet Clinics', style: headings),
-                      const SizedBox(height: 10),
+                      SizedBox(height: Sizes.defaultPadding),
+                      Text('Nearby Service Providers', style: Theme.of(context).textTheme.headlineMedium),
+                      SizedBox(height: Sizes.defaultPadding),
                       const PetClinicCard(clinicName:'Family Pet Clinic Isb ', location: 'Islamabad', imagePath: 'assets/vaccineclinic.jpg', targetScreen: bookscreen1()),
                       const SizedBox(height: 10),
                       const PetClinicCard(clinicName:'Aliyan Pets Hospital', location: 'Islamabad', imagePath: 'assets/vaccineclinic.jpg', targetScreen: bookscreen1()),

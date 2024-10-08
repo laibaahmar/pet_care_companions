@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import '../../../constants/colors.dart';
 import '../../../constants/constants.dart';
+import '../../../constants/images.dart';
+import '../../../constants/sizes.dart';
 import 'booking_screen/Booking_screen.dart';
 
-class routinecheckup extends StatefulWidget {
-  const routinecheckup({super.key});
+class RoutineCheckup extends StatefulWidget {
+  const RoutineCheckup({super.key});
 
   @override
-  State<routinecheckup> createState() => _routinecheckupState();
+  State<RoutineCheckup> createState() => _RoutineCheckupState();
 }
 
-class _routinecheckupState extends State<routinecheckup> {
+class _RoutineCheckupState extends State<RoutineCheckup> {
 
   String? selectedPet;
   int currentPageIndex = 0;
@@ -22,16 +25,15 @@ class _routinecheckupState extends State<routinecheckup> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffE9BC52),
       appBar: AppBar(
-        title: const Text('Routine Checkup'),
+        title: const Text('Routine Checkup', style: TextStyle(color: textColor, fontWeight: FontWeight.w500),),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
-        backgroundColor: const Color(0xffE9BC52),
+        backgroundColor: Colors.white,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -52,7 +54,6 @@ class _routinecheckupState extends State<routinecheckup> {
                         height: 200,
                         width: double.infinity, // Use double.infinity to fit the container width
                         decoration: BoxDecoration(
-                          border: Border.all(color: Colors.deepPurple),
                           boxShadow: [
                             BoxShadow(
                               color: Colors.black.withOpacity(0.3),
@@ -65,13 +66,13 @@ class _routinecheckupState extends State<routinecheckup> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: const Image(
-                          image: AssetImage('assets/routinecheckup.png'),
+                          image: AssetImage(routineCheckup),
                           fit: BoxFit.fill, // Ensure the image fits the container
                         ),
                       ),
-                      const SizedBox(height: 10),
-                      const Text('Select Pet Type',style: heading2,),
-                      const SizedBox(height: 10),
+                      SizedBox(height: Sizes.m),
+                      Text('Select Pet Type', style: Theme.of(context).textTheme.headlineSmall),
+                      SizedBox(height: Sizes.s),
                       RichText(
                         text: const TextSpan(
                           text: 'Note: ', style: TextStyle(color: Colors.red,fontSize: 18),
@@ -84,8 +85,9 @@ class _routinecheckupState extends State<routinecheckup> {
                       ),
 
 
-                      const SizedBox(height: 20),
+                      SizedBox(height: Sizes.m),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           GestureDetector(
                             onTap: () {
@@ -102,6 +104,8 @@ class _routinecheckupState extends State<routinecheckup> {
                               });
                             }, // End of onTap (Cat)
                             child: Container(
+                              width: 70,
+                              height: 70,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 boxShadow: [
@@ -118,7 +122,7 @@ class _routinecheckupState extends State<routinecheckup> {
                                 children: [
                                   const CircleAvatar(
                                     maxRadius: 45.0,
-                                    backgroundImage: AssetImage('assets/cat.png'),
+                                    backgroundImage: AssetImage(cat),
                                   ), // End of CircleAvatar (Cat)
                                   if (isCatLoading)
                                     const CircularProgressIndicator(
@@ -144,6 +148,8 @@ class _routinecheckupState extends State<routinecheckup> {
                               });
                             }, // End of onTap (Dog)
                             child: Container(
+                              width: 70,
+                              height: 70,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 boxShadow: [
@@ -160,7 +166,7 @@ class _routinecheckupState extends State<routinecheckup> {
                                 children: [
                                   const CircleAvatar(
                                     maxRadius: 45.0,
-                                    backgroundImage: AssetImage('assets/dog.png'),
+                                    backgroundImage: AssetImage(dog),
                                   ), // End of CircleAvatar (Dog)
                                   if (isDogLoading)
                                     const CircularProgressIndicator(
@@ -186,6 +192,8 @@ class _routinecheckupState extends State<routinecheckup> {
                               });
                             }, // End of onTap (Rabbit)
                             child: Container(
+                              width: 70,
+                              height: 70,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 boxShadow: [
@@ -202,7 +210,7 @@ class _routinecheckupState extends State<routinecheckup> {
                                 children: [
                                   const CircleAvatar(
                                     maxRadius: 45.0,
-                                    backgroundImage: AssetImage('assets/rabbit.png'),
+                                    backgroundImage: AssetImage(rabbit),
                                   ), // End of CircleAvatar (Rabbit)
                                   if (isRabbitLoading)
                                     const CircularProgressIndicator(
@@ -226,9 +234,9 @@ class _routinecheckupState extends State<routinecheckup> {
                             const SizedBox(height: 20),
                           ],
                         ),
-                      const SizedBox(height: 20),
-                      Text('Nearby Vet Clinics', style: headings),
-                      const SizedBox(height: 10),
+                      SizedBox(height: Sizes.defaultPadding),
+                      Text('Nearby Service Providers', style: Theme.of(context).textTheme.headlineMedium),
+                      SizedBox(height: Sizes.defaultPadding),
                       const PetClinicCard(clinicName:'Family Pet Clinic Isb ', location: 'Islamabad', imagePath: 'assets/vaccineclinic.jpg', targetScreen: bookscreen1()),
                       const SizedBox(height: 10),
                       const PetClinicCard(clinicName:'Aliyan Pets Hospital', location: 'Islamabad', imagePath: 'assets/vaccineclinic.jpg', targetScreen: bookscreen1()),

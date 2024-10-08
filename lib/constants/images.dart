@@ -30,3 +30,17 @@ const String loader = "assets/animations/loader.gif";
 const String doctor = "assets/images/home/doctor.png";
 const String ambulance = "assets/images/home/ambulance.png";
 const String community = "assets/images/home/community.png";
+
+// Care Screen
+const String vaccination = "assets/images/care/vaccination.png";
+const String dental = "assets/images/care/dentalcare.png";
+const String illness = "assets/images/care/ilnessinjuries.png";
+const String routineCheckup = "assets/images/care/routinecheckup.png";
+const String petSitting = "assets/images/care/petsitting.png";
+const String petWalking = "assets/images/care/petwalking.png";
+const String litterTraining = "assets/images/care/littertraining.png";
+
+// Animals
+const String cat = "assets/images/animals/cat.png";
+const String dog = "assets/images/animals/dog.png";
+const String rabbit = "assets/images/animals/rabbit.png";

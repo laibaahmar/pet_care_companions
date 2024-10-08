@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:pet/constants/images.dart';
+import 'package:pet/constants/sizes.dart';
+import '../../../constants/colors.dart';
 import '../../../constants/constants.dart';
 import 'booking_screen/Booking_screen.dart';
 
@@ -24,16 +27,15 @@ class _VaccinationScreenState extends State<VaccinationScreen> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      backgroundColor: const Color(0xffE9BC52),
       appBar: AppBar(
-        title: const Text('Vaccination Service'),
+        title: const Text('Vaccination Service', style: TextStyle(color: textColor, fontWeight: FontWeight.w500),),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
-        backgroundColor: const Color(0xffE9BC52),
+        backgroundColor: Colors.white,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -54,7 +56,6 @@ class _VaccinationScreenState extends State<VaccinationScreen> {
                         height: 200,
                         width: double.infinity, // Use double.infinity to fit the container width
                         decoration: BoxDecoration(
-                          border: Border.all(color: Colors.deepPurple),
                           boxShadow: [
                             BoxShadow(
                               color: Colors.black.withOpacity(0.3),
@@ -67,13 +68,13 @@ class _VaccinationScreenState extends State<VaccinationScreen> {
                           borderRadius: BorderRadius.circular(10),
                         ),
                         child: const Image(
-                          image: AssetImage('assets/vaccination.png'),
+                          image: AssetImage(vaccination),
                           fit: BoxFit.cover, // Ensure the image fits the container
                         ),
                       ),
-                      const SizedBox(height: 10),
-                      const Text('Select Pet Type',style: heading2,),
-                      const SizedBox(height: 10),
+                      SizedBox(height: Sizes.m),
+                      Text('Select Pet Type', style: Theme.of(context).textTheme.headlineSmall),
+                      SizedBox(height: Sizes.s),
                       RichText(
                         text: const TextSpan(
                           text: 'Note: ', style: TextStyle(color: Colors.red,fontSize: 18),
@@ -85,9 +86,9 @@ class _VaccinationScreenState extends State<VaccinationScreen> {
                         ),
                       ),
 
-
-                      const SizedBox(height: 20),
+                      SizedBox(height: Sizes.m),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           GestureDetector(
                             onTap: () {
@@ -104,6 +105,8 @@ class _VaccinationScreenState extends State<VaccinationScreen> {
                               });
                             }, // End of onTap (Cat)
                             child: Container(
+                              width: 70,
+                              height: 70,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 boxShadow: [
@@ -120,7 +123,7 @@ class _VaccinationScreenState extends State<VaccinationScreen> {
                                 children: [
                                   const CircleAvatar(
                                     maxRadius: 45.0,
-                                    backgroundImage: AssetImage('assets/cat.png'),
+                                    backgroundImage: AssetImage(cat),
                                   ), // End of CircleAvatar (Cat)
                                   if (isCatLoading)
                                     const CircularProgressIndicator(
@@ -146,6 +149,8 @@ class _VaccinationScreenState extends State<VaccinationScreen> {
                               });
                             }, // End of onTap (Dog)
                             child: Container(
+                              width: 70,
+                              height: 70,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 boxShadow: [
@@ -162,7 +167,7 @@ class _VaccinationScreenState extends State<VaccinationScreen> {
                                 children: [
                                   const CircleAvatar(
                                     maxRadius: 45.0,
-                                    backgroundImage: AssetImage('assets/dog.png'),
+                                    backgroundImage: AssetImage(dog),
                                   ), // End of CircleAvatar (Dog)
                                   if (isDogLoading)
                                     const CircularProgressIndicator(
@@ -188,6 +193,8 @@ class _VaccinationScreenState extends State<VaccinationScreen> {
                               });
                             }, // End of onTap (Rabbit)
                             child: Container(
+                              width: 70,
+                              height: 70,
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 boxShadow: [
@@ -204,7 +211,7 @@ class _VaccinationScreenState extends State<VaccinationScreen> {
                                 children: [
                                   const CircleAvatar(
                                     maxRadius: 45.0,
-                                    backgroundImage: AssetImage('assets/rabbit.png'),
+                                    backgroundImage: AssetImage(rabbit),
                                   ), // End of CircleAvatar (Rabbit)
                                   if (isRabbitLoading)
                                     const CircularProgressIndicator(
@@ -225,12 +232,11 @@ class _VaccinationScreenState extends State<VaccinationScreen> {
                               height: 150, // Fixed height for ListView
                               child: buildPetTips(selectedPet!),
                             ),
-                            const SizedBox(height: 20),
                           ],
                         ),
-                      const SizedBox(height: 20),
-                      Text('Nearby Vet Clinics', style: headings),
-                      const SizedBox(height: 10),
+                      SizedBox(height: Sizes.defaultPadding),
+                      Text('Nearby Service Providers', style: Theme.of(context).textTheme.headlineMedium),
+                      SizedBox(height: Sizes.defaultPadding),
                       const PetClinicCard(clinicName:'Family Pet Clinic Isb ', location: 'Islamabad', imagePath: 'assets/vaccineclinic.jpg', targetScreen: bookscreen1()),
                       const SizedBox(height: 10),
                       const PetClinicCard(clinicName:'Aliyan Pets Hospital', location: 'Islamabad', imagePath: 'assets/vaccineclinic.jpg', targetScreen: bookscreen1()),
