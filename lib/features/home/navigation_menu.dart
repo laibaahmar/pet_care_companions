@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:pet/constants/colors.dart';
 import 'package:pet/features/personalization/screens/settings/settings.dart';
+import 'package:pet/features/shop/MyShop_Screen.dart';
 
 import 'home.dart';
 
@@ -48,5 +49,5 @@ class NavigationMenu extends StatelessWidget {
 class NavigationController extends GetxController{
   final Rx<int> selectedIndex = 0.obs;
 
-  final screens = [const Home(), Container(color: Colors.greenAccent), Container(color: Colors.purple,), const SettingScreen()];
+  final screens = [const Home(), MyShopScreen(), Container(color: Colors.purple,), const SettingScreen()];
 }

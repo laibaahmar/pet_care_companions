@@ -17,7 +17,6 @@ class ProviderHomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(UserController());
     final controller1 = Get.put(ProviderController());
 
     return Scaffold(

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:pet/common/widgets/loaders/loaders.dart';
 import 'package:pet/utils/popups/full_screen_loader.dart';
 import '../../../../../constants/colors.dart';

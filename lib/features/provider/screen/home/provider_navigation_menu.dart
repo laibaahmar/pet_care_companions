@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:pet/constants/colors.dart';
+import 'package:pet/features/provider/screen/shop/MyShopScreen.dart';
 
 import '../settings/settings.dart';
 import 'home_screen.dart';
@@ -39,6 +40,6 @@ class ProviderNavigationMenu extends StatelessWidget {
 class NavigationController extends GetxController{
   final Rx<int> selectedIndex = 0.obs;
 
-  final screens = [const ProviderHomeScreen(), Container(color: Colors.greenAccent), Container(color: Colors.purple,), const ProviderSettingScreen()];
+  final screens = [const ProviderHomeScreen(), MyShopScreen(), Container(color: Colors.purple,), const ProviderSettingScreen()];
 }
 

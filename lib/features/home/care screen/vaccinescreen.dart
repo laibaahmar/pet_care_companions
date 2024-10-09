@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:pet/constants/images.dart';
 import 'package:pet/constants/sizes.dart';
+import 'package:pet/features/personalization/controller/user_controller.dart';
 import '../../../constants/colors.dart';
 import '../../../constants/constants.dart';
+import '../widgets/card.dart';
 import 'booking_screen/Booking_screen.dart';
 
 
@@ -14,6 +16,8 @@ class VaccinationScreen extends StatefulWidget {
 }
  
 class _VaccinationScreenState extends State<VaccinationScreen> {
+
+  final controller = UserController.instance;
   
   String? selectedPet;
   int currentPageIndex = 0;
@@ -249,7 +253,8 @@ class _VaccinationScreenState extends State<VaccinationScreen> {
                       const SizedBox(height: 10),
                       const PetClinicCard(clinicName:'Meow pet Clinic', location: 'RawalPindi', imagePath: 'assets/vaccineclinic.jpg', targetScreen: bookscreen1()),
                       const SizedBox(height: 10),
-                      const PetClinicCard(clinicName:'Capital Veterinary Clinic ', location: 'RawalPindi', imagePath: 'assets/vaccineclinic.jpg', targetScreen: bookscreen1()),
+                      const PetClinicCard(clinicName:'Veterinary Clinic ', location: 'RawalPindi', imagePath: 'assets/vaccineclinic.jpg', targetScreen: bookscreen1()),
+                      ProviderCard(providerName: controller.user.value.fullName, serviceName: 'Bathing', rating: '7', picture: vaccination,),
 
 
 

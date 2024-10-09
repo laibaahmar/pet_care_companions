@@ -1,17 +1,11 @@
-import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../common/widgets/loaders/loaders.dart';
-import '../../../constants/images.dart';
-import '../../../constants/sizes.dart';
 import '../../../data/repositories/user_repository.dart';
-import '../../../utils/popups/full_screen_loader.dart';
 import '../model/pet_model.dart';
 
 class PetController extends GetxController {

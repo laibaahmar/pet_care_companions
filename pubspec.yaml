@@ -70,6 +70,7 @@ flutter:
     - assets/images/home/
     - assets/images/care/
     - assets/images/animals/
+    - assets/taxilogos/
 
   fonts:
     - family: Ubuntu
