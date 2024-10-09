@@ -3,9 +3,6 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:pet/common/widgets/loaders/loaders.dart';
 import 'package:pet/utils/popups/full_screen_loader.dart';
-import 'package:shimmer/shimmer.dart';
-import 'dart:io';
-
 import '../../../../../constants/colors.dart';
 import '../../../../../constants/images.dart';
 import '../../../../../constants/sizes.dart';
@@ -31,14 +28,6 @@ class EditPetScreen extends StatelessWidget {
   String? _imageUrl;
 
   EditPetScreen({super.key, required this.pet});
-
-  Future<void> _pickImage() async {
-    final picker = ImagePicker();
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
-    if (pickedFile != null) {
-      _imageUrl = pickedFile.path; // Store the image path
-    }
-  }
 
   Future<void> _updatePet(BuildContext context) async {
     if (_formKey.currentState!.validate()) {
@@ -90,36 +79,6 @@ class EditPetScreen extends StatelessWidget {
             key: _formKey,
             child: Column(
               children: [
-                GestureDetector(
-                  onTap: _pickImage,
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      _imageUrl == null && pet.imageUrl.isEmpty
-                          ? Shimmer.fromColors(
-                        baseColor: Colors.grey[300]!,
-                        highlightColor: Colors.grey[100]!,
-                        child: CircleAvatar(radius: 50, backgroundColor: Colors.grey[300]),
-                      )
-                          : CircleAvatar(
-                        radius: 50,
-                        backgroundImage: _imageUrl != null
-                            ? FileImage(File(_imageUrl!))
-                            : pet.imageUrl.isNotEmpty
-                            ? NetworkImage(pet.imageUrl)
-                            : const AssetImage('assets/default_pet_image.png') as ImageProvider,
-                      ),
-                      Positioned(
-                        bottom: 0,
-                        right: 0,
-                        child: IconButton(
-                          icon: const Icon(Icons.camera_alt, color: Colors.blueAccent),
-                          onPressed: _pickImage,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
                 SizedBox(height: Sizes.defaultPadding),
                 _buildTextFormField('Pet Name', (value) => _name = value!),
                 SizedBox(height: Sizes.defaultPadding),

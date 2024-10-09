@@ -3,7 +3,10 @@ import 'package:get/get.dart';
 import 'package:pet/constants/sizes.dart';
 import 'package:pet/features/pets/screen/pet_screen/widgets/add_pet_button.dart';
 import 'package:pet/features/pets/screen/profile/pet_profile.dart';
+import '../../../../common/widgets/circular_image/circular_image.dart';
+import '../../../../common/widgets/shimmer/shimmer_effect.dart';
 import '../../../../constants/colors.dart';
+import '../../../../constants/images.dart';
 import '../../../personalization/controller/user_controller.dart';
 import '../../controller/pet_controller.dart';
 
@@ -14,6 +17,7 @@ class MyPetsScreen extends StatelessWidget {
   MyPetsScreen({super.key, required this.userId}) {
     petController.fetchPets(userId); // Fetch pets when the screen is created
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -62,11 +66,13 @@ class MyPetsScreen extends StatelessWidget {
                         Get.to(() => PetProfile(pet: petController.pets[index]));
                       },
                       child: ListTile(
-                        leading: petController.pets[index].imageUrl.isNotEmpty
-                            ? CircleAvatar(
-                          backgroundImage: NetworkImage(petController.pets[index].imageUrl),
-                        )
-                            : const CircleAvatar(child: Icon(Icons.pets)),
+                        leading: Obx((){
+                          final networkImage = petController.pets[index].imageUrl;
+                          final image = networkImage.isNotEmpty ? networkImage : cat;
+                          return petController.imageUploading.value
+                              ? const ShimmerEffect(width: 100, height: 100, radius: 80,)
+                              : CircularImage(image: image, width: 100, height: 100, isNetworkImage: networkImage.isNotEmpty, fit: BoxFit.fill,);
+                        }),
                         title: Text(petController.pets[index].name),
                         subtitle: Text(
                           '${petController.pets[index].type}, ${petController.pets[index].breed}, Age: ${petController.pets[index].age}',

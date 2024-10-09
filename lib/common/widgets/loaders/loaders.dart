@@ -4,7 +4,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:pet/constants/colors.dart';
 
 class Loaders {
-  static successSnackBar({required title, message = '', duration = 3}) {
+  static successSnackBar({required title, message = '', duration = 2}) {
     Get.snackbar(
       title,
       message,

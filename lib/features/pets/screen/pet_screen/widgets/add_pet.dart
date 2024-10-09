@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pet/utils/popups/full_screen_loader.dart';
 
 import '../../../../../constants/colors.dart';
+import '../../../../../constants/images.dart';
 import '../../../../../constants/sizes.dart';
 import '../../../../../utils/validators/validation.dart';
 import '../../../controller/pet_controller.dart';
@@ -28,6 +30,7 @@ class AddPetScreen extends StatelessWidget {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
 
+      FullScreenLoader.openLoadingDialogue('Adding Pet', loader);
       MedicalRecord medicalRecord = MedicalRecord(
         diseases: _diseases,
         vaccinations: _vaccinations,
@@ -47,6 +50,8 @@ class AddPetScreen extends StatelessWidget {
       );
 
       petController.addPet(userId, newPet);
+
+      FullScreenLoader.stopLoading();
       Get.back();
     }
   }

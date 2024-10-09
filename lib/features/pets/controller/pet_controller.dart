@@ -3,9 +3,15 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../common/widgets/loaders/loaders.dart';
+import '../../../constants/images.dart';
+import '../../../constants/sizes.dart';
+import '../../../data/repositories/user_repository.dart';
+import '../../../utils/popups/full_screen_loader.dart';
 import '../model/pet_model.dart';
 
 class PetController extends GetxController {
@@ -14,6 +20,8 @@ class PetController extends GetxController {
   var pet = Pet.empty().obs;
   var pets = <Pet>[].obs;
   var isLoadingImage = false.obs;
+  final imageUploading = false.obs;
+  final userRepository = Get.put(UserRepository());
 
   String? getCurrentUserId() {
     User? user = FirebaseAuth.instance.currentUser;
@@ -72,35 +80,96 @@ class PetController extends GetxController {
     }
   }
 
-  Future<void> uploadProfilePicture(String petId) async {
-    final picker = ImagePicker();
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+  uploadProfilePicture(String petId) async {
+    try {
+      print('petId: $petId');
+      final image = await ImagePicker().pickImage(source: ImageSource.gallery, imageQuality: 70, maxHeight: 512, maxWidth: 512);
+      if(image != null) {
+        imageUploading.value = true;
 
-    if (pickedFile != null) {
-      File imageFile = File(pickedFile.path);
-      try {
-        isLoadingImage.value = true; // Start shimmer effect
+        // Uploading Image
+        final imageUrl = await userRepository.uploadImage('Pets/Profile', image);
 
-        String filePath = 'profile_pictures/${petId}_${DateTime.now().millisecondsSinceEpoch}.jpg';
-        UploadTask uploadTask = FirebaseStorage.instance.ref(filePath).putFile(imageFile);
+        // Update User Image Record
+        String? userId = getCurrentUserId();
+        if (userId != null) {
+          await FirebaseFirestore.instance
+              .collection('Users')
+              .doc(userId)
+              .collection('pets')
+              .doc(petId)  // Assuming pet has an id value
+              .update({'imageUrl': imageUrl});  // Save the image URL to Firestore
+        }
+        pet.refresh();
 
-        TaskSnapshot taskSnapshot = await uploadTask;
-        String downloadUrl = await taskSnapshot.ref.getDownloadURL();
-
-        await FirebaseFirestore.instance.collection('Users').doc(getCurrentUserId()).collection('pets').doc(petId).update({
-          'imageUrl': downloadUrl,
-        });
-
-        pet.update((val) {
-          val?.imageUrl = downloadUrl;
-        });
-
-        Get.snackbar('Success', 'Profile picture updated successfully.');
-      } catch (e) {
-        Get.snackbar('Error', 'Failed to upload profile picture.');
-      } finally {
-        isLoadingImage.value = false; // Stop shimmer effect
+        Loaders.successSnackBar(title: "Congratulations", message: 'Your Profile Image has been updated');
       }
+    } catch (e) {
+      Loaders.errorSnackBar(title: 'Oh Snap!', message: 'Something went wrong: $e');
+    } finally {
+      imageUploading.value = false;
     }
   }
+
+  // void deletePet(String petId) async {
+  //   String? userId = getCurrentUserId();
+  //
+  //   if (userId == null) {
+  //     print("No user is logged in.");
+  //     return;
+  //   }
+  //
+  //   try {
+  //     // Delete the pet document from Firestore
+  //     await FirebaseFirestore.instance
+  //         .collection('Users')
+  //         .doc(userId)
+  //         .collection('pets')
+  //         .doc(petId)
+  //         .delete();
+  //
+  //     // Remove the pet from the local list
+  //     pets.removeWhere((pet) => pet.id == petId);
+  //
+  //     Loaders.successSnackBar(title: 'Success!', message: 'Your pet has been removed');
+  //
+  //     Get.back();
+  //   } catch (e) {
+  //     Loaders.errorSnackBar(title:'Error', message: 'Your pet has not been removed');
+  //   }
+  // }
+
+  void deletePet(String petId) async {
+
+    String? userId = getCurrentUserId();
+
+    if (userId == null) {
+      print("No user is logged in.");
+      return;
+    }
+
+    try {
+      // Delete the pet document from Firestore
+      await FirebaseFirestore.instance
+          .collection('Users')
+          .doc(userId)
+          .collection('pets')
+          .doc(petId)
+          .delete();
+
+      // Remove the pet from the local list
+      pets.removeWhere((pet) => pet.id == petId);
+
+      // Show success message using ScaffoldMessenger
+      Loaders.successSnackBar(title:"Success", message: "Your pet has been removed");
+
+      Get.back();
+    } catch (e) {
+      // Show error message using ScaffoldMessenger
+      Loaders.errorSnackBar(title: "Error", message: "Your pet has not been removed");
+    }
+  }
+
+
+
 }

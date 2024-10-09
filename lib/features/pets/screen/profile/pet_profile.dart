@@ -1,17 +1,25 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pet/features/pets/controller/pet_controller.dart';
+import '../../../../common/widgets/circular_image/circular_image.dart';
+import '../../../../common/widgets/shimmer/shimmer_effect.dart';
 import '../../../../constants/colors.dart';
+import '../../../../constants/images.dart';
 import '../../../../constants/sizes.dart';
 import '../../model/pet_model.dart';
 import '../pet_screen/widgets/edit_pet.dart';
 
 class PetProfile extends StatelessWidget {
   final Pet pet;
+  var pets = <Pet>[].obs;
 
   PetProfile({super.key, required this.pet});
 
   @override
   Widget build(BuildContext context) {
+    final controller = PetController.instance;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -40,18 +48,23 @@ class PetProfile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Pet Image
-              Center(
-                child: CircleAvatar(
-                  radius: 70,
-                  backgroundImage: pet.imageUrl.isNotEmpty
-                      ? NetworkImage(pet.imageUrl)
-                      : const AssetImage('assets/images/default_pet.png') as ImageProvider,
-                  child: pet.imageUrl.isEmpty
-                      ? const Icon(Icons.pets, size: 50, color: Colors.white)
-                      : null,
+              SizedBox(
+                width: double.infinity,
+                child: Column(
+                  children: [
+                    Obx((){
+                      final networkImage = pet.imageUrl;
+                      final image = networkImage.isNotEmpty ? networkImage : cat;
+                      return controller.imageUploading.value
+                          ? const ShimmerEffect(width: 100, height: 100, radius: 80,)
+                          : CircularImage(image: image, width: 100, height: 100, isNetworkImage: networkImage.isNotEmpty,);
+                    }),
+                    TextButton(onPressed: () => controller.uploadProfilePicture(pet.id), child: Text('Change Profile Picture', style: Theme.of(context).textTheme.bodySmall,)),
+                  ],
                 ),
               ),
               SizedBox(height: Sizes.defaultPadding),
+              const Divider(),
 
               // Full Description Section (Moved above other details)
               Container(
@@ -131,6 +144,34 @@ class PetProfile extends StatelessWidget {
                     textStyle: const TextStyle(fontSize: 18),
                   ),
                   child: const Text('Edit Profile'),
+                ),
+              ),
+              SizedBox(height: 20,),
+              Center(
+                child: TextButton(
+                  child: const Text('Remove Pet',  style: TextStyle(color: Colors.red),),
+                  onPressed: () {
+                    // Show a confirmation dialog before deletion
+                    Get.defaultDialog(
+                      backgroundColor: Colors.white,
+                      contentPadding: EdgeInsets.all(Sizes.s*2),
+                      title: "Remove Pet",
+                      content: Text("Are you sure you want to remove this pet permanently?", textAlign: TextAlign.center,),
+                      confirm: ElevatedButton(
+                        onPressed: () {
+                          controller.deletePet(pet.id);
+                          Get.back(); // Close the dialog after deletion
+                        },
+                        child: Text("Yes"),
+                      ),
+                      cancel: TextButton(
+                        onPressed: () {
+                          Get.back(); // Close the dialog without deleting
+                        },
+                        child: Text("No"),
+                      ),
+                    );
+                  },
                 ),
               ),
               SizedBox(height: 20,)
