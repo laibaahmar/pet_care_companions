@@ -338,8 +338,6 @@
                       );
                     }).toList(),
                   ),
-
-
                   SizedBox(height: Sizes.defaultPadding),
                   SizedBox(
                     width: double.infinity,
