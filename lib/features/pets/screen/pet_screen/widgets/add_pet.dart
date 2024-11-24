@@ -274,22 +274,25 @@
                     },
                     dropdownColor: Colors.white,
                   ),
-                  SizedBox(height: Sizes.defaultPadding),
-                  Wrap(
-                    spacing: 8,
-                    children: _diseases.map((disease) {
-                      return Chip(
-                        label: Text(disease),
-                        deleteIcon: Icon(Icons.close),
-                        onDeleted: () {
-                          setState(() {
-                            _diseases.remove(disease); // Remove disease from the list
-                          });
-                        },
-                      );
-                    }).toList(),
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Wrap(
+                      spacing: 8,
+                      children: _diseases.map((disease) {
+                        return Chip(
+                          side: BorderSide(color: textColor),
+                          label: Text(disease, style: TextStyle(color: textColor),),
+                          backgroundColor: Colors.white,
+                          deleteIcon: Icon(Icons.close),
+                          onDeleted: () {
+                            setState(() {
+                              _diseases.remove(disease); // Remove disease from the list
+                            });
+                          },
+                        );
+                      }).toList(),
+                    ),
                   ),
-                  SizedBox(height: Sizes.defaultPadding),
                   DropdownButtonFormField<String>(
                     decoration: const InputDecoration(labelText: 'Vaccinations'),
                     value: null, // Reset the dropdown value after selection
@@ -323,20 +326,24 @@
                     },
                     dropdownColor: Colors.white,
                   ),
-                  SizedBox(height: Sizes.defaultPadding),
-                  Wrap(
-                    spacing: 8,
-                    children: _vaccinations.map((vaccination) {
-                      return Chip(
-                        label: Text(vaccination),
-                        deleteIcon: Icon(Icons.close),
-                        onDeleted: () {
-                          setState(() {
-                            _vaccinations.remove(vaccination); // Remove vaccination from the list
-                          });
-                        },
-                      );
-                    }).toList(),
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Wrap(
+                      spacing: 8,
+                      children: _vaccinations.map((vaccination) {
+                        return Chip(
+                          side: BorderSide(color: textColor),
+                          backgroundColor: Colors.white,
+                          label: Text(vaccination, style: TextStyle(color: textColor),),
+                          deleteIcon: Icon(Icons.close),
+                          onDeleted: () {
+                            setState(() {
+                              _vaccinations.remove(vaccination); // Remove vaccination from the list
+                            });
+                          },
+                        );
+                      }).toList(),
+                    ),
                   ),
                   SizedBox(height: Sizes.defaultPadding),
                   SizedBox(

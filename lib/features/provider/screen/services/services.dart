@@ -31,20 +31,19 @@ class ServiceOverview extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text("My Services", style: Theme.of(context).textTheme.headlineSmall),
-
-                // Conditionally display services or only the "Add New Service" button
+                SizedBox(height: Sizes.defaultPadding),
                 controller.services.isEmpty
                     ? Column(
-                      children: [
-                        const SizedBox(height: 20),
-                        _buildAddServiceButton(),
-                      ],
-                    ) // No services, just show the add button
+                  children: [
+                    const SizedBox(height: 20),
+                    _buildAddServiceButton(),
+                  ],
+                )
                     : Column(
                   children: [
-                    _buildServicesList(controller.services), // Show list of services
+                    _buildServicesList(controller.services), // Show updated list of services
                     const SizedBox(height: 20),
-                    _buildAddServiceButton(), // Show add button at the bottom
+                    _buildAddServiceButton(),
                   ],
                 ),
               ],

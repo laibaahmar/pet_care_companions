@@ -173,8 +173,7 @@ class ProviderController extends GetxController {
     isAvailable.value = true;
   }
 
-  Future<void> updateService(String serviceId,
-      {required String providerId}) async {
+  Future<void> updateService(String serviceId, {required String providerId}) async {
     final updatedService = ServiceModel(
       serviceId: serviceId,
       name: nameController.text,
@@ -188,6 +187,7 @@ class ProviderController extends GetxController {
     try {
       FullScreenLoader.openLoadingDialogue("Updating Service...", loader);
 
+      // Perform the update operation in Firestore
       await FirebaseFirestore.instance
           .collection('providers')
           .doc(providerId)
@@ -195,19 +195,24 @@ class ProviderController extends GetxController {
           .doc(serviceId)
           .update(updatedService.toJson());
 
+      // Update the local services list
+      int index = services.indexWhere((service) => service.serviceId == serviceId);
+      if (index != -1) {
+        services[index] = updatedService; // Update the service in the local list
+      }
+
+      clearForm();
+      Get.back();
+
       Loaders.successSnackBar(
           title: "Success!", message: 'Service updated successfully');
       FullScreenLoader.stopLoading();
-      clearForm();
-      Get.back(); // Go back to the previous page
-
     } catch (e) {
       Loaders.errorSnackBar(title: "Error", message: 'Failed to update service: $e');
-
-      // Stop loading dialog
       FullScreenLoader.stopLoading();
     }
   }
+
 
   Future<void> deleteService(String serviceId, String providerId) async {
     try {
