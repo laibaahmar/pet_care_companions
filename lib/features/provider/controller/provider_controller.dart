@@ -124,7 +124,7 @@ class ProviderController extends GetxController {
     }
   }
 
-  Future<void> addService({required providerId}) async {
+  Future<void> addService(BuildContext context, {required providerId, String? certificateUrl,}) async {
     String serviceId = DateTime
         .now()
         .millisecondsSinceEpoch
@@ -139,6 +139,7 @@ class ProviderController extends GetxController {
       durationInMinutes: int.parse(durationController.text),
       isAvailable: isAvailable.value,
       category: selectedSubCategory.value,
+      certificateUrl: certificateUrl,
     );
 
     try {
@@ -152,9 +153,11 @@ class ProviderController extends GetxController {
 
       Loaders.successSnackBar(
           title: "Success!", message: 'Service is added successfully');
+
       FullScreenLoader.stopLoading();
+
       clearForm();
-      Get.back();
+      Navigator.of(context).pop();
     } catch (e) {
       Loaders.errorSnackBar(
           title: "Error", message: 'Failed to add service: $e');
@@ -173,7 +176,7 @@ class ProviderController extends GetxController {
     isAvailable.value = true;
   }
 
-  Future<void> updateService(String serviceId, {required String providerId}) async {
+  Future<void> updateService(String serviceId, {required String providerId, String? certificateUrl}) async {
     final updatedService = ServiceModel(
       serviceId: serviceId,
       name: nameController.text,
@@ -214,7 +217,7 @@ class ProviderController extends GetxController {
   }
 
 
-  Future<void> deleteService(String serviceId, String providerId) async {
+  Future<void> deleteService(BuildContext context, String serviceId, String providerId) async {
     try {
       // Open loading dialog
       FullScreenLoader.openLoadingDialogue("Deleting Service...", loader);
@@ -227,14 +230,14 @@ class ProviderController extends GetxController {
           .doc(serviceId)
           .delete();
 
-      // Show success message
-      Loaders.successSnackBar(title: "Success!", message: 'Service deleted successfully');
 
-      // Stop loading dialog
-      FullScreenLoader.stopLoading();
-
-      // Optionally, you can remove the deleted service from the local list
       services.removeWhere((service) => service.serviceId == serviceId);
+      // Show success message
+
+      Loaders.successSnackBar(title: "Success!", message: 'Service is deleted successfully');
+      FullScreenLoader.stopLoading();
+      Navigator.of(context).pop();
+
     } catch (e) {
       // Show error message
       Loaders.errorSnackBar(title: "Error", message: 'Failed to delete service: $e');

@@ -27,26 +27,27 @@ class ServiceOverview extends StatelessWidget {
           padding: EdgeInsets.only(right: Sizes.defaultPadding, left: Sizes.defaultPadding),
           child: Obx(() {
             // Observe the services list to check if it's empty or not
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text("My Services", style: Theme.of(context).textTheme.headlineSmall),
-                SizedBox(height: Sizes.defaultPadding),
-                controller.services.isEmpty
-                    ? Column(
-                  children: [
-                    const SizedBox(height: 20),
-                    _buildAddServiceButton(),
-                  ],
-                )
-                    : Column(
-                  children: [
-                    _buildServicesList(controller.services), // Show updated list of services
-                    const SizedBox(height: 20),
-                    _buildAddServiceButton(),
-                  ],
-                ),
-              ],
+            return Container(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text("My Services", style: Theme.of(context).textTheme.headlineSmall),
+                  controller.services.isEmpty
+                      ? Column(
+                    children: [
+                      const SizedBox(height: 20),
+                      _buildAddServiceButton(),
+                    ],
+                  )
+                      : Column(
+                    children: [
+                      _buildServicesList(controller.services), // Show updated list of services
+                      const SizedBox(height: 20),
+                      _buildAddServiceButton(),
+                    ],
+                  ),
+                ],
+              ),
             );
           }),
         ),
