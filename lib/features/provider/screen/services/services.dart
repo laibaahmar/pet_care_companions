@@ -7,6 +7,7 @@ import 'package:pet/features/provider/screen/services/widgets/add_service.dart';
 import 'package:pet/features/provider/screen/services/widgets/edit_service-page.dart';
 
 import '../../controller/provider_controller.dart';
+import '../../controller/service_controller.dart';
 
 class ServiceOverview extends StatelessWidget {
   final String providerId; // Pass providerId to fetch specific provider services
@@ -16,7 +17,7 @@ class ServiceOverview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Initialize controller
-    final ProviderController controller = Get.put(ProviderController());
+    final ServiceController controller = Get.put(ServiceController());
 
     // Fetch services for the provider
     controller.fetchServices(providerId);

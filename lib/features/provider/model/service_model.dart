@@ -57,6 +57,8 @@
 // }
 
 
+import '../../authentication/models/user_model.dart';
+
 class ServiceModel {
   String serviceId;
   String name;
@@ -65,7 +67,8 @@ class ServiceModel {
   int durationInMinutes;
   bool isAvailable;
   String category; // New category field
-  String? certificateUrl; // Optional certificate URL (points to the PDF in Firebase Storage)
+  String? certificateUrl;
+  final UserModel user;
 
   // Constructor
   ServiceModel({
@@ -76,7 +79,8 @@ class ServiceModel {
     required this.durationInMinutes,
     this.isAvailable = true,
     required this.category, // Add category as a required parameter
-    this.certificateUrl, // Optional certificate URL
+    this.certificateUrl,
+    required this.user,
   });
 
   // Convert model to JSON
@@ -89,7 +93,8 @@ class ServiceModel {
       'DurationInMinutes': durationInMinutes,
       'IsAvailable': isAvailable,
       'Category': category,
-      'CertificateUrl': certificateUrl, // Store the URL of the PDF (optional)
+      'CertificateUrl': certificateUrl,
+      'User': user.toJson(),
     };
   }
 
@@ -103,7 +108,8 @@ class ServiceModel {
       durationInMinutes: json['DurationInMinutes'] ?? 0,
       isAvailable: json['IsAvailable'] ?? true,
       category: json['Category'] ?? '',
-      certificateUrl: json['CertificateUrl'], // Deserialize certificate URL
+      certificateUrl: json['CertificateUrl'],
+      user: UserModel.fromJson(json['User'] ?? {}),
     );
   }
 
@@ -115,6 +121,7 @@ class ServiceModel {
     price: 0.0,
     durationInMinutes: 0,
     category: '',
-    certificateUrl: null, // Initialize certificateUrl as null
+    certificateUrl: null,
+    user: UserModel.empty(),
   );
 }

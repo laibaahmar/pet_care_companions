@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:pet/utils/formatters/formatters.dart';
 
-import '../../provider/model/provider_model.dart';
-
 class UserModel {
   final String id;
   String firstName;
@@ -11,7 +9,6 @@ class UserModel {
   final String email;
   String phoneNo;
   String profilePicture;
-  ServiceProviderModel? serviceProvider;
 
   // Constructors
   UserModel({
@@ -22,7 +19,6 @@ class UserModel {
    required this.email,
    required this.phoneNo,
    required this.profilePicture,
-    this.serviceProvider,
   });
 
   // Helper Function for Full Name.
@@ -57,7 +53,6 @@ class UserModel {
       'Email': email,
       'PhoneNo': phoneNo,
       'ProfilePicture': profilePicture,
-      'ServiceProvider': serviceProvider?.toJson(),
     };
   }
 
@@ -71,14 +66,22 @@ class UserModel {
         lastName: data?['LastName'] ?? '',
         username: data?['Username'] ?? '',
         email: data?['Email'] ?? '',
-        phoneNo: data?['PhoneNumber'] ?? '',
+        phoneNo: data?['PhoneNo'] ?? '',
         profilePicture: data?['ProfilePicture'] ?? '',
-        serviceProvider: data?['ServiceProvider'] != null
-            ? ServiceProviderModel.fromJson(data!['ServiceProvider'])
-            : null,
       );
     } else {
       return UserModel.empty();
     }
+  }
+  factory UserModel.fromJson(Map<String, dynamic> json) {
+    return UserModel(
+      id: json['id'] ?? '',
+      firstName: json['FirstName'] ?? '',
+      lastName: json['LastName'] ?? '',
+      username: json['Username'] ?? '',
+      email: json['Email'] ?? '',
+      phoneNo: json['PhoneNo'] ?? '',
+      profilePicture: json['ProfilePicture'] ?? '',
+    );
   }
 }

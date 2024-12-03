@@ -1,86 +1,94 @@
-// import 'package:pet/features/provider/model/service_model.dart';
+// // provider_model.dart
+// import 'package:cloud_firestore/cloud_firestore.dart';
 //
 // class ServiceProviderModel {
 //   String id;
 //   String bio;
-//   String location;
-//   double rating;
-//   int completedJobs;
-//   bool isAvailable;
-//   List<ServiceModel> services; // List of services provided
+//   DateTime createdAt;
 //
-//   ServiceProviderModel({
-//     required this.id,
-//     required this.bio,
-//     required this.location,
-//     this.rating = 0.0,
-//     this.completedJobs = 0,
-//     this.isAvailable = true,
-//     required this.services,
-//   });
+//   ServiceProviderModel({required this.id, required this.bio, required this.createdAt});
 //
-//   // Convert model to JSON
+//   static ServiceProviderModel empty() => ServiceProviderModel(id: '', bio: '', createdAt: DateTime.now());
+//
+//   // Convert a ProviderModel into a Map. The Map is used to send data to Firestore
 //   Map<String, dynamic> toJson() {
 //     return {
-//       'Expertise': id,
-//       'Bio': bio,
-//       'Location': location,
-//       'Rating': rating,
-//       "Completed Jobs": completedJobs,
-//       'Availability': isAvailable,
-//       'Services': services.map((service) => service.toJson()).toList(),
+//       'bio': bio,
+//       'createdAt': createdAt,
 //     };
 //   }
 //
-//   // Create ServiceProviderModel from Firebase Document
+//   // Convert a Map into a ProviderModel
 //   factory ServiceProviderModel.fromJson(Map<String, dynamic> json) {
 //     return ServiceProviderModel(
 //       id: json['ID'] ?? '',
 //       bio: json['Bio'] ?? '',
-//       location: json['Location'] ?? '',
-//       rating: (json['Rating'] as num?)?.toDouble() ?? 0.0,
-//       completedJobs: json['Completed Jobs'] ?? '',
-//       isAvailable: json['Availability'] ?? '',
-//       services: (json['Services'] as List)
-//           .map((service) => ServiceModel.fromJson(service))
-//           .toList(),
+//       createdAt: (json['createdAt'] as Timestamp).toDate(),
 //     );
 //   }
-//
-//   static ServiceProviderModel empty() => ServiceProviderModel(
-//     id: '',
-//     bio: '',
-//     location: '',
-//     services: [],
-//   );
 // }
+//
 
-// provider_model.dart
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ServiceProviderModel {
   String id;
+  String firstName;
+  String lastName;
+  String username;
   String bio;
   DateTime createdAt;
+  String phoneNo;
+  String profilePicture;
 
-  ServiceProviderModel({required this.id, required this.bio, required this.createdAt});
+  // Constructor with the new fields
+  ServiceProviderModel({
+    required this.id,
+    required this.firstName,
+    required this.lastName,
+    required this.username,
+    required this.bio,
+    required this.createdAt,
+    required this.phoneNo,
+    required this.profilePicture,
+  });
 
-  static ServiceProviderModel empty() => ServiceProviderModel(id: '', bio: '', createdAt: DateTime.now());
+  static ServiceProviderModel empty() => ServiceProviderModel(
+    id: '',
+    firstName: '',
+    lastName: '',
+    username: '',
+    bio: '',
+    createdAt: DateTime.now(),
+    phoneNo: '',
+    profilePicture: '',
+  );
 
-  // Convert a ProviderModel into a Map. The Map is used to send data to Firestore
+  // Convert a ServiceProviderModel into a Map for Firestore
   Map<String, dynamic> toJson() {
     return {
-      'bio': bio,
+      'ID': id,
+      'FirstName': firstName,
+      'LastName': lastName,
+      'Username': username,
+      'Bio': bio,
       'createdAt': createdAt,
+      'PhoneNo': phoneNo,
+      'ProfilePicture': profilePicture,
     };
   }
 
-  // Convert a Map into a ProviderModel
+  // Convert a Map from Firestore to a ServiceProviderModel
   factory ServiceProviderModel.fromJson(Map<String, dynamic> json) {
     return ServiceProviderModel(
       id: json['ID'] ?? '',
+      firstName: json['FirstName'] ?? '',
+      lastName: json['LastName'] ?? '',
+      username: json['Username'] ?? '',
       bio: json['Bio'] ?? '',
       createdAt: (json['createdAt'] as Timestamp).toDate(),
+      phoneNo: json['PhoneNo'] ?? '',
+      profilePicture: json['ProfilePicture'] ?? '',
     );
   }
 }

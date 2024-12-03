@@ -264,12 +264,12 @@ import 'package:get/get.dart';
 import 'package:pet/constants/colors.dart';
 import 'package:pet/constants/sizes.dart';
 import '../../../controller/pdf_controller.dart';
-import '../../../controller/provider_controller.dart';
+import '../../../controller/service_controller.dart';
 import '../../../model/service_model.dart';
 
 class EditServicePage extends StatelessWidget {
   final ServiceModel service;
-  final ProviderController controller = Get.find<ProviderController>(); // Use existing instance
+  final ServiceController controller = Get.find<ServiceController>(); // Use existing instance
   final PdfController pdfController = Get.put(PdfController());
 
   EditServicePage({super.key, required this.service}) {
