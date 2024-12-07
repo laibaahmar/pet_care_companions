@@ -263,9 +263,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pet/constants/colors.dart';
 import 'package:pet/constants/sizes.dart';
-import '../../../controller/pdf_controller.dart';
-import '../../../controller/service_controller.dart';
-import '../../../model/service_model.dart';
+import '../../../../controller/pdf_controller.dart';
+import '../../../../controller/service_controller.dart';
+import '../../../../model/service_model.dart';
 
 class EditServicePage extends StatelessWidget {
   final ServiceModel service;

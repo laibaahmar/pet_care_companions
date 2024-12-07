@@ -3,11 +3,9 @@ import 'package:get/get.dart';
 import 'package:pet/constants/colors.dart';
 import 'package:pet/constants/sizes.dart';
 import 'package:pet/features/provider/model/service_model.dart';
-import 'package:pet/features/provider/screen/services/widgets/add_service.dart';
-import 'package:pet/features/provider/screen/services/widgets/edit_service-page.dart';
-
-import '../../controller/provider_controller.dart';
-import '../../controller/service_controller.dart';
+import 'package:pet/features/provider/screen/home/services/widgets/add_service.dart';
+import 'package:pet/features/provider/screen/home/services/widgets/edit_service-page.dart';
+import '../../../controller/service_controller.dart';
 
 class ServiceOverview extends StatelessWidget {
   final String providerId; // Pass providerId to fetch specific provider services

@@ -3,14 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pet/constants/colors.dart';
 import 'package:pet/features/provider/screen/home/provider_app_bar.dart';
-import 'package:pet/features/provider/screen/reviews/reviews.dart';
-import '../../../personalization/controller/user_controller.dart';
+import 'package:pet/features/provider/screen/home/reviews/reviews.dart';
+import 'package:pet/features/provider/screen/home/services/services.dart';
 import '../../controller/provider_controller.dart';
-import '../about/about.dart';
-import '../appointment/appointment.dart';
-import '../earning/earning.dart';
 import '../profle/provider_profile.dart';
-import '../services/services.dart';
+import 'about/about.dart';
+import 'appointment/appointment.dart';
+import 'earning/earning.dart';
 
 class ProviderHomeScreen extends StatelessWidget {
   const ProviderHomeScreen({super.key});

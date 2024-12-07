@@ -4,8 +4,8 @@ import 'package:get/get.dart';
 import 'package:pet/constants/colors.dart';
 import 'package:pet/constants/sizes.dart';
 import 'package:pet/features/provider/controller/service_controller.dart';
-import '../../../controller/pdf_controller.dart';
-import '../../../controller/provider_controller.dart';
+import '../../../../controller/pdf_controller.dart';
+import '../../../../controller/provider_controller.dart';
 
 class AddServicePage extends StatelessWidget {
   final ProviderController controller = Get.find<ProviderController>(); // Use existing instance

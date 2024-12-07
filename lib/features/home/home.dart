@@ -15,55 +15,57 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: logoPurple,
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            SizedBox(
-              width: HelpFunctions.screenWidth(),
-              child: const MyAppBar(),
-            ),
-
-            // Search Bar
-            const Searchbar(),
-            SizedBox(height: Sizes.defaultPadding,),
-
-            Container(
-              width: HelpFunctions.screenWidth(),
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20.0), // Adjust the radius as needed
-                  topRight: Radius.circular(20.0), // Adjust the radius as needed
-                ),
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: logoPurple,
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(
+                width: HelpFunctions.screenWidth(),
+                child: const MyAppBar(),
               ),
-              child: Padding(
-                padding: EdgeInsets.all(Sizes.defaultPadding),
-                child: Column(
-                    children: [
-                      // Consult
-                      SizedBox(height: Sizes.s*1.5,),
-                      const SectionHeading(title: "Consult", showActionButton: false,),
-                      SizedBox(height: Sizes.s*1.5,),
-                      const ConsultSection(),
-                      SizedBox(height: Sizes.m,),
-
-                      // Services
-                      const SectionHeading(title: "Services", showActionButton: false,),
-                      SizedBox(height: Sizes.s*1.5,),
-                      const PetServicesSection(),
-                      SizedBox(height: Sizes.m,),
-
-                      // Community
-                      const SectionHeading(title: "Community", showActionButton: false,),
-                      SizedBox(height: Sizes.s*1.5,),
-                      const Community(),
-                      SizedBox(height: Sizes.m,),
-                    ]
+      
+              // Search Bar
+              const Searchbar(),
+              SizedBox(height: Sizes.defaultPadding,),
+      
+              Container(
+                width: HelpFunctions.screenWidth(),
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(20.0), // Adjust the radius as needed
+                    topRight: Radius.circular(20.0), // Adjust the radius as needed
+                  ),
                 ),
-              ),
-            )],
+                child: Padding(
+                  padding: EdgeInsets.all(Sizes.defaultPadding),
+                  child: Column(
+                      children: [
+                        // Consult
+                        SizedBox(height: Sizes.s*1.5,),
+                        const SectionHeading(title: "Consult", showActionButton: false,),
+                        SizedBox(height: Sizes.s*1.5,),
+                        const ConsultSection(),
+                        SizedBox(height: Sizes.m,),
+      
+                        // Services
+                        const SectionHeading(title: "Services", showActionButton: false,),
+                        SizedBox(height: Sizes.s*1.5,),
+                        const PetServicesSection(),
+                        SizedBox(height: Sizes.m,),
+      
+                        // Community
+                        const SectionHeading(title: "Community", showActionButton: false,),
+                        SizedBox(height: Sizes.s*1.5,),
+                        const Community(),
+                        SizedBox(height: Sizes.m,),
+                      ]
+                  ),
+                ),
+              )],
+          ),
         ),
       ),
     );

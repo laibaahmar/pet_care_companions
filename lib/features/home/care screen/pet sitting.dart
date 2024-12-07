@@ -3,7 +3,6 @@ import '../../../constants/colors.dart';
 import '../../../constants/constants.dart';
 import '../../../constants/images.dart';
 import '../../../constants/sizes.dart';
-import 'booking_screen/Booking_screen.dart';
 
 class PetSitting extends StatefulWidget {
   const PetSitting({super.key});
@@ -236,24 +235,6 @@ class _PetSittingState extends State<PetSitting> {
                       SizedBox(height: Sizes.defaultPadding),
                       Text('Nearby Service Providers', style: Theme.of(context).textTheme.headlineMedium),
                       SizedBox(height: Sizes.defaultPadding),
-                      const PetClinicCard(clinicName:'Family Pet Clinic Isb ', location: 'Islamabad', imagePath: 'assets/vaccineclinic.jpg', targetScreen: bookscreen1()),
-                      const SizedBox(height: 10),
-                      const PetClinicCard(clinicName:'Aliyan Pets Hospital', location: 'Islamabad', imagePath: 'assets/vaccineclinic.jpg', targetScreen: bookscreen1()),
-                      const SizedBox(height: 10),
-                      const PetClinicCard(clinicName:'The Pets Hopital Islamabad', location: 'Islamabad', imagePath: 'assets/vaccineclinic.jpg', targetScreen: bookscreen1()),
-                      const SizedBox(height: 10),
-                      const PetClinicCard(clinicName:'Alpha Pet care', location: 'Islamabad', imagePath: 'assets/vaccineclinic.jpg', targetScreen: bookscreen1()),
-                      const SizedBox(height: 10),
-                      const PetClinicCard(clinicName:'MS Pet Clinic', location: 'RawalPindi', imagePath: 'assets/vaccineclinic.jpg', targetScreen: bookscreen1()),
-                      const SizedBox(height: 10),
-                      const PetClinicCard(clinicName:'Meow pet Clinic', location: 'RawalPindi', imagePath: 'assets/vaccineclinic.jpg', targetScreen: bookscreen1()),
-                      const SizedBox(height: 10),
-                      const PetClinicCard(clinicName:'Capital Veterinary Clinic ', location: 'RawalPindi', imagePath: 'assets/vaccineclinic.jpg', targetScreen: bookscreen1()),
-
-
-
-
-
                     ],
                   ),
                 ),

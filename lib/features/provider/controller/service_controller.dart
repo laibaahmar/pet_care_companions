@@ -13,6 +13,7 @@ import '../model/service_model.dart'; // Adjust the import based on your project
 class ServiceController extends GetxController {
   var services = <ServiceModel>[].obs; // Observable list of services
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  bool isLoading = false;
 
   RxBool isAvailable = true.obs;
   var selectedCategory = ''.obs;
@@ -47,6 +48,8 @@ class ServiceController extends GetxController {
           categorySubCategories[selectedCategory.value]?.first ??
               ''; // Set the first subcategory as default
     }
+
+    fetchPetCareServices();
   }
 
   // Fetch services from Firestore
@@ -252,6 +255,35 @@ class ServiceController extends GetxController {
     }
   }
 
+  Future<void> fetchPetCareServices() async {
+    try {
+      // Fetch all provider IDs from Firestore
+      QuerySnapshot providerSnapshot = await FirebaseFirestore.instance
+          .collection('providers')
+          .get();
 
+      List<ServiceModel> petCareServices = [];
 
+      // Loop through each provider and fetch their services
+      for (var providerDoc in providerSnapshot.docs) {
+        // Fetch services for each provider
+        QuerySnapshot serviceSnapshot = await FirebaseFirestore.instance
+            .collection('providers')
+            .doc(providerDoc.id)
+            .collection('Services')
+            .where('Category', isEqualTo: 'Bathing') // Filter by 'Pet Care'
+            .get();
+
+        // Add the services to the petCareServices list
+        for (var serviceDoc in serviceSnapshot.docs) {
+          ServiceModel service = ServiceModel.fromJson(serviceDoc.data() as Map<String, dynamic>);
+          petCareServices.add(service);
+        }
+      }
+      // Update the services list in the controller
+      services.value = petCareServices;
+    } catch (e) {
+      print('Error fetching pet care services: $e');
+    }
+  }
 }

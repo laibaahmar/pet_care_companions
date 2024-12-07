@@ -4,9 +4,8 @@ import 'package:pet/constants/sizes.dart';
 import 'package:pet/features/personalization/controller/user_controller.dart';
 import '../../../constants/colors.dart';
 import '../../../constants/constants.dart';
-import '../widgets/card.dart';
-import 'booking_screen/Booking_screen.dart';
-
+import '../../provider/controller/service_controller.dart';
+import 'package:get/get.dart';
 
 class VaccinationScreen extends StatefulWidget {
   const VaccinationScreen({super.key});
@@ -14,11 +13,12 @@ class VaccinationScreen extends StatefulWidget {
   @override
   _VaccinationScreenState createState() => _VaccinationScreenState();
 }
- 
+
 class _VaccinationScreenState extends State<VaccinationScreen> {
 
   final controller = UserController.instance;
-  
+  final ServiceController serviceController = Get.put(ServiceController());
+
   String? selectedPet;
   int currentPageIndex = 0;
   int catClickCount = 0; // Counter for Cat clicks
@@ -241,25 +241,38 @@ class _VaccinationScreenState extends State<VaccinationScreen> {
                       SizedBox(height: Sizes.defaultPadding),
                       Text('Nearby Service Providers', style: Theme.of(context).textTheme.headlineMedium),
                       SizedBox(height: Sizes.defaultPadding),
-                      const PetClinicCard(clinicName:'Family Pet Clinic Isb ', location: 'Islamabad', imagePath: 'assets/vaccineclinic.jpg', targetScreen: bookscreen1()),
-                      const SizedBox(height: 10),
-                      const PetClinicCard(clinicName:'Aliyan Pets Hospital', location: 'Islamabad', imagePath: 'assets/vaccineclinic.jpg', targetScreen: bookscreen1()),
-                      const SizedBox(height: 10),
-                      const PetClinicCard(clinicName:'The Pets Hopital Islamabad', location: 'Islamabad', imagePath: 'assets/vaccineclinic.jpg', targetScreen: bookscreen1()),
-                      const SizedBox(height: 10),
-                      const PetClinicCard(clinicName:'Alpha Pet care', location: 'Islamabad', imagePath: 'assets/vaccineclinic.jpg', targetScreen: bookscreen1()),
-                      const SizedBox(height: 10),
-                      const PetClinicCard(clinicName:'MS Pet Clinic', location: 'RawalPindi', imagePath: 'assets/vaccineclinic.jpg', targetScreen: bookscreen1()),
-                      const SizedBox(height: 10),
-                      const PetClinicCard(clinicName:'Meow pet Clinic', location: 'RawalPindi', imagePath: 'assets/vaccineclinic.jpg', targetScreen: bookscreen1()),
-                      const SizedBox(height: 10),
-                      const PetClinicCard(clinicName:'Veterinary Clinic ', location: 'RawalPindi', imagePath: 'assets/vaccineclinic.jpg', targetScreen: bookscreen1()),
-                      ProviderCard(providerName: controller.user.value.fullName, serviceName: 'Bathing', rating: '7', picture: vaccination,),
-
-
-
-
-
+                      Obx(() {
+                        if (serviceController.isLoading) {
+                          return Center(child: CircularProgressIndicator());
+                        }
+                        if (serviceController.services.isEmpty) {
+                          return Center(child: Text("No services available"));
+                        }
+                        return ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: serviceController.services.length,
+                          itemBuilder: (context, index) {
+                            final service = serviceController.services[index];
+                            return Card(
+                              margin: EdgeInsets.all(8),
+                              child: ListTile(
+                                title: Text(service.name),
+                                subtitle: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text('Description: ${service.description}'),
+                                    Text('Price: \$${service.price.toString()}'),
+                                    Text('Duration: ${service.durationInMinutes} mins'),
+                                    Text('User: ${service.user.fullName}'),
+                                    Text('User Email: ${service.user.email}'),
+                                  ],
+                                ),
+                                trailing: Icon(service.isAvailable ? Icons.check : Icons.close),
+                              ),
+                            );
+                          },
+                        );
+                      }),
                     ],
                   ),
                 ),
@@ -370,117 +383,6 @@ class _VaccinationScreenState extends State<VaccinationScreen> {
   }
 
 }
-class PetClinicCard extends StatelessWidget {
-  final String clinicName;
-  final String location;
-  final String imagePath;
-  final Widget targetScreen;
-
-  const PetClinicCard({super.key, 
-    required this.clinicName,
-    required this.location,
-    required this.imagePath,
-    required this.targetScreen,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 180,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.3),
-            spreadRadius: 4,
-            blurRadius: 7,
-            offset: const Offset(0, 3),
-          ),
-        ],
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              height: 150,
-              width: 150,
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.purple),
-                borderRadius: BorderRadius.circular(10),
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: AssetImage(imagePath),
-                ),
-              ),
-            ),
-            const SizedBox(width: 16),
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    clinicName,
-                    style:heading2,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
-                  ),
-                  const SizedBox(height: 8),
-                  Row(
-                    children: List.generate(5, (index) {
-                      return const Icon(
-                        Icons.star,
-                        color: Colors.yellow,
-                        size: 16.0,
-                      );
-                    }),
-                  ),
-                  const SizedBox(height: 8),
-                  RichText(
-                    text: TextSpan(
-                      text: 'Location: ',
-                      style: bodybold,
-                      children: <TextSpan>[
-                        TextSpan(
-                          text: location,
-                          style:body,
-                        ),
-                      ],
-                    ),
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  const SizedBox(height: 16),
-                  CustomElevatedButton(
-                    title: 'Book Now',
-                    targetScreen: targetScreen,
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
