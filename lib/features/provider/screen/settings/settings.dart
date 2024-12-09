@@ -41,6 +41,7 @@ class ProviderSettingScreen extends StatelessWidget {
 
             // Body
             Container(
+              height: HelpFunctions.screenHeight() - 100, 
               width: HelpFunctions.screenWidth(),
               decoration: const BoxDecoration(
                 color: Colors.white,

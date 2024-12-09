@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pet/constants/images.dart';
 import '../../../constants/colors.dart';
-import '../grooming screen/bathing_and_brushing.dart';
-import '../grooming screen/deshedding_and_haircutting.dart';
-import '../grooming screen/styling_and_touches.dart';
+import '../grooming screen/bathing_and_brushing/bathing_and_brushing.dart';
+import '../grooming screen/deshedding/deshedding_and_haircutting.dart';
+import '../grooming screen/styling/styling_and_touches.dart';
 
 class GroomingScreen extends StatefulWidget {
   const GroomingScreen({super.key});

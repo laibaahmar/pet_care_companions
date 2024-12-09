@@ -48,8 +48,6 @@ class ServiceController extends GetxController {
           categorySubCategories[selectedCategory.value]?.first ??
               ''; // Set the first subcategory as default
     }
-
-    fetchPetCareServices();
   }
 
   // Fetch services from Firestore
@@ -255,7 +253,7 @@ class ServiceController extends GetxController {
     }
   }
 
-  Future<void> fetchPetCareServices() async {
+  Future<void> fetchPetCareServices(String category) async {
     try {
       // Fetch all provider IDs from Firestore
       QuerySnapshot providerSnapshot = await FirebaseFirestore.instance
@@ -271,7 +269,7 @@ class ServiceController extends GetxController {
             .collection('providers')
             .doc(providerDoc.id)
             .collection('Services')
-            .where('Category', isEqualTo: 'Bathing') // Filter by 'Pet Care'
+            .where('Category', isEqualTo: category) // Filter by 'Pet Care'
             .get();
 
         // Add the services to the petCareServices list

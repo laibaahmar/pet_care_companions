@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:pet/constants/images.dart';
 import 'package:pet/constants/sizes.dart';
 import '../../../constants/colors.dart';
-import '../care screen/dentalscreen.dart';
-import '../care screen/illnessandinjuries.dart';
-import '../care screen/litter training.dart';
-import '../care screen/pet sitting.dart';
-import '../care screen/pet walking.dart';
-import '../care screen/routinecheckup.dart';
-import '../care screen/vaccinescreen.dart';
+import '../care screen/dental/dental_screen.dart';
+import '../care screen/illness_and_injuries/illness_and_injuries.dart';
+import '../care screen/litter_training/litter training.dart';
+import '../care screen/pet_sitting/pet sitting.dart';
+import '../care screen/pet_walking/pet walking.dart';
+import '../care screen/routine_checkup/routinecheckup.dart';
+import '../care screen/vaccination/vaccinescreen.dart';
 
 
 class CareScreen extends StatelessWidget {

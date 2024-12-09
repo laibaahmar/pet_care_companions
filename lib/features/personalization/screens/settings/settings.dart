@@ -43,6 +43,7 @@ class SettingScreen extends StatelessWidget {
             // Body
             Container(
               width: HelpFunctions.screenWidth(),
+              height: HelpFunctions.screenHeight() - 100,
               decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(topRight: Radius.circular(20), topLeft: Radius.circular(20)),
